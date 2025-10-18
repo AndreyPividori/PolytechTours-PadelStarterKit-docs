@@ -2360,7 +2360,397 @@ CREATE TABLE
 </tr>
 </table>
 </pre>
+<h1>5. Spécifications des Tests</h1>
 
+<h2>5.1 Tests Unitaires (Backend Python)</h2>
+
+<h3>5.1.1 Framework et organisation</h3>
+
+<p><strong>Framework :</strong> Pytest</p>
+<p><strong>Structure :</strong></p>
+<pre>
+tests/
+├── conftest.py              # Fixtures globales
+├── test_auth.py             # Tests authentification
+├── test_players.py          # Tests joueurs
+├── test_teams.py            # Tests équipes
+├── test_matches.py          # Tests matchs
+├── test_events.py           # Tests événements
+├── test_security.py         # Tests sécurité
+└── test_validation.py       # Tests validation
+</pre>
+
+<h3>5.1.2 Couverture minimale requise</h3>
+
+<div class="warning-box">
+<strong>OBJECTIF :</strong> Couverture minimale de 70% du code backend
+</div>
+
+<p><strong>Commande pour mesurer la couverture :</strong></p>
+<pre>
+pytest --cov=app --cov-report=html --cov-report=term
+</pre>
+
+<h3>5.1.3 Scénarios de tests obligatoires</h3>
+
+<h4>Tests d'authentification (test_auth.py)</h4>
+<ul>
+    <li>✓ Connexion avec credentials valides</li>
+    <li>✓ Connexion avec email invalide</li>
+    <li>✓ Connexion avec mot de passe invalide</li>
+    <li>✓ Blocage après 5 tentatives échouées</li>
+    <li>✓ Déblocage automatique après 30 minutes</li>
+    <li>✓ Réinitialisation du compteur après connexion réussie</li>
+    <li>✓ Génération correcte du JWT</li>
+    <li>✓ Vérification de l'expiration du token</li>
+    <li>✓ Changement de mot de passe</li>
+</ul>
+
+<h4>Tests de validation (test_validation.py)</h4>
+<ul>
+    <li>✓ Validation email (format valide/invalide)</li>
+    <li>✓ Validation numéro de licence (format LXXXXXX)</li>
+    <li>✓ Validation mot de passe (politique de sécurité)</li>
+    <li>✓ Validation nom/prénom (caractères autorisés)</li>
+    <li>✓ Validation date (format, âge minimum)</li>
+    <li>✓ Validation score (format padel)</li>
+</ul>
+
+<h4>Tests des joueurs (test_players.py)</h4>
+<ul>
+    <li>✓ Création joueur avec données valides</li>
+    <li>✓ Refus création si champ obligatoire manquant</li>
+    <li>✓ Refus si licence déjà utilisée</li>
+    <li>✓ Refus si email déjà utilisé</li>
+    <li>✓ Modification des informations</li>
+    <li>✓ Suppression si joueur sans équipe</li>
+    <li>✓ Refus suppression si joueur dans une équipe</li>
+</ul>
+
+<h4>Tests des équipes (test_teams.py)</h4>
+<ul>
+    <li>✓ Création équipe valide</li>
+    <li>✓ Refus si joueurs d'entreprises différentes</li>
+    <li>✓ Refus si joueur déjà dans une équipe</li>
+    <li>✓ Refus si player1_id == player2_id</li>
+    <li>✓ Modification équipe sans match</li>
+    <li>✓ Refus modification si matchs joués</li>
+</ul>
+
+<h4>Tests des poules (test_pools.py)</h4>
+<ul>
+    <li>✓ Création poule avec 6 équipes</li>
+    <li>✓ Refus si nombre d'équipes != 6</li>
+    <li>✓ Refus si nom déjà utilisé</li>
+    <li>✓ Suppression si aucun match joué</li>
+</ul>
+
+<h4>Tests des matchs (test_matches.py)</h4>
+<ul>
+    <li>✓ Création match valide</li>
+    <li>✓ Refus si même piste déjà occupée</li>
+    <li>✓ Refus si équipe joue 2 fois dans un événement</li>
+    <li>✓ Mise à jour du score avec format valide</li>
+    <li>✓ Refus score avec format invalide</li>
+    <li>✓ Suppression uniquement si statut A_VENIR</li>
+</ul>
+
+<h4>Tests de sécurité (test_security.py)</h4>
+<ul>
+    <li>✓ Accès refusé sans token</li>
+    <li>✓ Accès refusé avec token expiré</li>
+    <li>✓ Accès refusé avec token invalide</li>
+    <li>✓ Accès refusé si rôle insuffisant</li>
+    <li>✓ Hashing correct des mots de passe</li>
+    <li>✓ Protection XSS (sanitization)</li>
+</ul>
+
+<h3>5.1.4 Exemple de test</h3>
+
+<pre>
+# tests/test_auth.py
+import pytest
+from fastapi.testclient import TestClient
+from app.main import app
+
+client = TestClient(app)
+
+def test_login_success(test_db, test_user):
+    """Test connexion avec credentials valides"""
+    response = client.post("/api/v1/auth/login", json={
+        "email": "test@example.com",
+        "password": "ValidP@ssw0rd123"
+    })
+    
+    assert response.status_code == 200
+    data = response.json()
+    assert "access_token" in data
+    assert data["user"]["email"] == "test@example.com"
+    assert data["user"]["role"] == "JOUEUR"
+
+def test_login_invalid_password(test_db, test_user):
+    """Test connexion avec mot de passe invalide"""
+    response = client.post("/api/v1/auth/login", json={
+        "email": "test@example.com",
+        "password": "WrongPassword"
+    })
+    
+    assert response.status_code == 401
+    data = response.json()
+    assert "attempts_remaining" in data
+
+def test_brute_force_protection(test_db, test_user):
+    """Test blocage après 5 tentatives échouées"""
+    # Faire 5 tentatives échouées
+    for i in range(5):
+        response = client.post("/api/v1/auth/login", json={
+            "email": "test@example.com",
+            "password": "WrongPassword"
+        })
+        assert response.status_code == 401
+    
+    # La 6ème tentative doit être bloquée
+    response = client.post("/api/v1/auth/login", json={
+        "email": "test@example.com",
+        "password": "ValidP@ssw0rd123"
+    })
+    
+    assert response.status_code == 403
+    data = response.json()
+    assert "locked_until" in data
+    assert "minutes_remaining" in data
+</pre>
+
+<h2>5.2 Tests End-to-End (Cypress)</h2>
+
+<h3>5.2.1 Configuration Cypress</h3>
+
+<p><strong>Installation :</strong></p>
+<pre>
+npm install --save-dev cypress
+</pre>
+
+<p><strong>Structure :</strong></p>
+<pre>
+cypress/
+├── e2e/
+│   ├── auth.cy.js           # Tests authentification
+│   ├── player.cy.js         # Tests joueur
+│   ├── admin.cy.js          # Tests admin
+│   └── navigation.cy.js     # Tests navigation
+├── fixtures/
+│   └── users.json           # Données de test
+└── support/
+    └── commands.js          # Commandes custom
+</pre>
+
+<h3>5.2.2 Scénarios E2E obligatoires</h3>
+
+<h4>Parcours Visiteur</h4>
+<ul>
+    <li>✓ Accès à la page d'accueil</li>
+    <li>✓ Impossibilité d'accéder aux autres pages sans connexion</li>
+    <li>✓ Redirection automatique vers login</li>
+</ul>
+
+<h4>Parcours Joueur</h4>
+<ul>
+    <li>✓ Connexion réussie</li>
+    <li>✓ Navigation vers le planning</li>
+    <li>✓ Visualisation de ses prochains matchs</li>
+    <li>✓ Consultation de ses résultats</li>
+    <li>✓ Modification de son profil</li>
+    <li>✓ Impossibilité d'accéder à l'administration</li>
+    <li>✓ Déconnexion</li>
+</ul>
+
+<h4>Parcours Administrateur</h4>
+<ul>
+    <li>✓ Connexion admin</li>
+    <li>✓ Création d'un joueur</li>
+    <li>✓ Création d'une équipe</li>
+    <li>✓ Création d'une poule avec 6 équipes</li>
+    <li>✓ Ajout d'un événement avec matchs</li>
+    <li>✓ Modification d'un match</li>
+    <li>✓ Saisie d'un score</li>
+    <li>✓ Création d'un compte pour un joueur</li>
+    <li>✓ Réinitialisation d'un mot de passe</li>
+</ul>
+
+<h3>5.2.3 Exemple de test Cypress</h3>
+
+<pre>
+// cypress/e2e/auth.cy.js
+
+describe('Authentification', () => {
+  beforeEach(() => {
+    cy.visit('http://localhost:5173')
+  })
+
+  it('Affiche la page de login', () => {
+    cy.contains('Se connecter').should('be.visible')
+    cy.get('input[type="email"]').should('be.visible')
+    cy.get('input[type="password"]').should('be.visible')
+  })
+
+  it('Connexion avec credentials valides', () => {
+    cy.get('input[type="email"]').type('joueur@example.com')
+    cy.get('input[type="password"]').type('ValidP@ssw0rd123')
+    cy.get('button[type="submit"]').click()
+    
+    // Vérifier la redirection
+    cy.url().should('include', '/dashboard')
+    cy.contains('Bienvenue').should('be.visible')
+  })
+
+  it('Connexion échoue avec mauvais mot de passe', () => {
+    cy.get('input[type="email"]').type('joueur@example.com')
+    cy.get('input[type="password"]').type('WrongPassword')
+    cy.get('button[type="submit"]').click()
+    
+    // Vérifier le message d'erreur
+    cy.contains('Email ou mot de passe incorrect').should('be.visible')
+    cy.contains('tentatives restantes').should('be.visible')
+  })
+
+  it('Bloque le compte après 5 tentatives échouées', () => {
+    // Faire 5 tentatives
+    for (let i = 0; i < 5; i++) {
+      cy.get('input[type="email"]').clear().type('joueur@example.com')
+      cy.get('input[type="password"]').clear().type('WrongPassword')
+      cy.get('button[type="submit"]').click()
+      cy.wait(500)
+    }
+    
+    // Vérifier le blocage
+    cy.contains('Compte bloqué').should('be.visible')
+    cy.contains('minutes').should('be.visible')
+  })
+})
+</pre>
+
+<h2>5.3 Tests de Sécurité OWASP (Bonus)</h2>
+
+<div class="success-box">
+<strong>BONUS :</strong> Ces tests ne sont pas obligatoires mais rapportent des points supplémentaires
+</div>
+
+<h3>5.3.1 OWASP Top 10</h3>
+
+<p><strong>Tests recommandés :</strong></p>
+
+<table>
+    <tr>
+        <th>Vulnérabilité</th>
+        <th>Test</th>
+        <th>Outil</th>
+    </tr>
+    <tr>
+        <td>Injection SQL</td>
+        <td>Tentatives d'injection dans les formulaires</td>
+        <td>sqlmap, manuel</td>
+    </tr>
+    <tr>
+        <td>Authentification cassée</td>
+        <td>Brute force, session hijacking</td>
+        <td>Burp Suite</td>
+    </tr>
+    <tr>
+        <td>XSS</td>
+        <td>Injection de scripts dans les champs texte</td>
+        <td>XSStrike</td>
+    </tr>
+    <tr>
+        <td>Exposition de données</td>
+        <td>Vérifier les réponses API</td>
+        <td>Manuel</td>
+    </tr>
+    <tr>
+        <td>Contrôle d'accès</td>
+        <td>Accès aux ressources sans autorisation</td>
+        <td>Manuel</td>
+    </tr>
+</table>
+
+<h3>5.3.2 Checklist de sécurité</h3>
+
+<pre>
+□ Les mots de passe sont-ils hashés avec bcrypt?
+□ Les tokens JWT expirent-ils correctement?
+□ Les entrées utilisateur sont-elles sanitizées?
+□ Le mécanisme anti-brute force fonctionne-t-il?
+□ Les rôles sont-ils correctement vérifiés?
+□ Les messages d'erreur ne divulguent-ils pas d'informations sensibles?
+□ Les fichiers uploadés sont-ils validés?
+□ Les headers de sécurité sont-ils présents?
+□ HTTPS est-il forcé en production?
+□ Les secrets sont-ils dans des variables d'environnement?
+</pre>
+
+<h1>6. Livrables et Évaluation</h1>
+
+<h2>6.1 Livrables attendus</h2>
+
+<h3>6.1.1 Code source</h3>
+
+<div class="info-box">
+<strong>Format :</strong> Archive ZIP ou repository Git<br>
+<strong>Date limite :</strong> À définir par l'enseignant
+</div>
+
+<p><strong>Contenu obligatoire :</strong></p>
+<ul>
+    <li>Code source complet (backend + frontend)</li>
+    <li>Fichier README.md détaillé</li>
+    <li>Requirements.txt (Python) et package.json (Node)</li>
+    <li>Base de données SQLite</li>
+    <li>Tests unitaires et E2E</li>
+    <li>Fichier .env.example (sans les vraies valeurs)</li>
+</ul>
+
+<h3>6.1.2 Rapport technique</h3>
+
+<p><strong>Format :</strong> PDF, 10-15 pages</p>
+
+<p><strong>Structure du rapport :</strong></p>
+<ol>
+    <li><strong>Introduction</strong> (1 page)
+        <ul>
+            <li>Présentation du projet</li>
+            <li>Objectifs</li>
+        </ul>
+    </li>
+    <li><strong>Architecture</strong> (2-3 pages)
+        <ul>
+            <li>Schéma d'architecture</li>
+            <li>Choix technologiques</li>
+            <li>Modèle de données</li>
+        </ul>
+    </li>
+    <li><strong>Fonctionnalités implémentées</strong> (3-4 pages)
+        <ul>
+            <li>Description détaillée</li>
+            <li>Screenshots</li>
+        </ul>
+    </li>
+    <li><strong>Sécurité</strong> (2-3 pages)
+        <ul>
+            <li>Mesures implémentées</li>
+            <li>Tests de sécurité</li>
+            <li>Vulnérabilités identifiées et corrigées</li>
+        </ul>
+    </li>
+    <li><strong>Tests</strong> (2-3 pages)
+        <ul>
+            <li>Stratégie de test</li>
+            <li>Couverture</li>
+            <li>Résultats</li>
+        </ul>
+    </li>
+    <li><strong>Difficultés rencontrées</strong> (1 page)</li>
+    <li><strong>Améliorations possibles</strong> (1 page)</li>
+    <li><strong>Conclusion</strong> (0.5 page)</li>
+</ol>
 <h1>7. Annexes</h1>
 
 <h2>7.1 Kit de démarrage</h2>
