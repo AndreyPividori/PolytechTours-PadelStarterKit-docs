@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Corpo Padel - Documentation Projet</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f5f5f5;
+        }
+
+        /* NAVBAR */
+        .navbar {
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        .navbar-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 2rem;
+        }
+
+        .navbar-brand {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .navbar-menu {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .navbar-link {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .navbar-link:hover,
+        .navbar-link.active {
+            background: rgba(255,255,255,0.2);
+        }
+
+        /* CONTENT */
+        .content {
+            margin-top: 80px;
+            min-height: calc(100vh - 80px);
+        }
+
+        .page {
+            display: none;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            margin-bottom: 2rem;
+        }
+
+        .page.active {
+            display: block;
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* CAHIER DES CHARGES STYLES */
+        .cdc h1 {
+            color: #1e40af;
+            font-size: 2.5rem;
+            border-bottom: 3px solid #1e40af;
+            padding-bottom: 0.5rem;
+            margin: 2rem 0 1rem 0;
+        }
+
+        .cdc h2 {
+            color: #3b82f6;
+            font-size: 1.8rem;
+            margin: 1.5rem 0 1rem 0;
+            border-left: 5px solid #3b82f6;
+            padding-left: 1rem;
+        }
+
+        .cdc h3 {
+            color: #475569;
+            font-size: 1.3rem;
+            margin: 1rem 0 0.5rem 0;
+        }
+
+        .cdc table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+        }
+
+        .cdc th {
+            background-color: #1e40af;
+            color: white;
+            padding: 0.8rem;
+            text-align: left;
+        }
+
+        .cdc td {
+            border: 1px solid #e2e8f0;
+            padding: 0.6rem;
+        }
+
+        .cdc tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+
+        .cdc .info-box {
+            background-color: #eff6ff;
+            border-left: 4px solid #3b82f6;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 5px;
+        }
+
+        .cdc .warning-box {
+            background-color: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 5px;
+        }
+
+        .cdc .danger-box {
+            background-color: #fee2e2;
+            border-left: 4px solid #ef4444;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 5px;
+        }
+
+        .cdc pre {
+            background-color: #1e293b;
+            color: #e2e8f0;
+            padding: 1rem;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-size: 0.85rem;
+        }
+
+        .cdc code {
+            background-color: #f1f5f9;
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+
+        .cdc ul, .cdc ol {
+            margin: 1rem 0;
+            padding-left: 2rem;
+        }
+
+        .cdc li {
+            margin: 0.5rem 0;
+        }
+
+        /* STARTER KIT STYLES */
+        .starter-kit h1 {
+            color: #1e40af;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .starter-kit h2 {
+            color: #3b82f6;
+            font-size: 1.8rem;
+            margin: 2rem 0 1rem 0;
+        }
+
+        .starter-kit h3 {
+            color: #475569;
+            font-size: 1.3rem;
+            margin: 1.5rem 0 0.5rem 0;
+        }
+
+        .starter-kit pre {
+            background-color: #1e293b;
+            color: #e2e8f0;
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-size: 0.9rem;
+            margin: 1rem 0;
+        }
+
+        .starter-kit code {
+            background-color: #f1f5f9;
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+
+        .starter-kit ul {
+            margin: 1rem 0;
+            padding-left: 2rem;
+        }
+
+        .starter-kit li {
+            margin: 0.5rem 0;
+        }
+
+        .starter-kit .badge {
+            background-color: #10b981;
+            color: white;
+            padding: 0.2rem 0.5rem;
+            border-radius: 3px;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            text-align: center;
+            padding: 3rem 2rem;
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+            color: white;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .hero-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .navbar-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .navbar-menu {
+                gap: 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .page {
+                padding: 1rem;
+            }
+
+            .cdc h1 {
+                font-size: 1.8rem;
+            }
+
+            .cdc h2 {
+                font-size: 1.4rem;
+            }
+        }
+
+        /* FOOTER */
+        .footer {
+            background: #1e293b;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+
+        .footer a {
+            color: #3b82f6;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="navbar-content">
+            <div class="navbar-brand">
+                <span>🎾</span>
+                <span>Corpo Padel</span>
+            </div>
+            <ul class="navbar-menu">
+                <li><a href="#" class="navbar-link active" data-page="home">Accueil</a></li>
+                <li><a href="#" class="navbar-link" data-page="cahier">Cahier des charges</a></li>
+                <li><a href="#" class="navbar-link" data-page="starter">Starter Kit</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- CONTENT -->
+    <div class="content">
+        <!-- HOME PAGE -->
+        <div id="home" class="page active">
+            <div class="hero">
+                <div class="hero-icon">🎾</div>
+                <h1>Projet Corpo Padel</h1>
+                <p>Documentation complète pour votre projet pédagogique</p>
+                <p style="font-size: 1rem; margin-top: 1rem;">Cours de Test et Sécurité - Formation Ingénieur</p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin: 2rem 0;">
+                <div style="background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+                    <h2 style="color: #1e40af; margin-bottom: 1rem;">📄 Cahier des charges</h2>
+                    <p>Document complet de 45+ pages avec toutes les spécifications fonctionnelles, techniques et de sécurité.</p>
+                    <ul style="margin: 1rem 0;">
+                        <li>Spécifications fonctionnelles détaillées</li>
+                        <li>Architecture technique complète</li>
+                        <li>Exigences de sécurité</li>
+                        <li>Guide des tests</li>
+                        <li>Critères d'évaluation</li>
+                    </ul>
+                    <a href="#" onclick="navigateTo('cahier'); return false;" style="display: inline-block; background: #1e40af; color: white; padding: 0.8rem 1.5rem; border-radius: 5px; text-decoration: none; margin-top: 1rem;">Consulter →</a>
+                </div>
+
+                <div style="background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+                    <h2 style="color: #1e40af; margin-bottom: 1rem;">💻 Starter Kit</h2>
+                    <p>Kit de démarrage prêt à l'emploi avec backend FastAPI et frontend VueJS configurés.</p>
+                    <ul style="margin: 1rem 0;">
+                        <li>Authentification JWT fonctionnelle</li>
+                        <li>Anti-brute force implémenté</li>
+                        <li>Structure complète backend/frontend</li>
+                        <li>Tests unitaires et E2E</li>
+                        <li>README multi-OS</li>
+                    </ul>
+                    <a href="#" onclick="navigateTo('starter'); return false;" style="display: inline-block; background: #1e40af; color: white; padding: 0.8rem 1.5rem; border-radius: 5px; text-decoration: none; margin-top: 1rem;">Consulter →</a>
+                </div>
+            </div>
+
+            <div style="background: #eff6ff; padding: 2rem; border-radius: 10px; margin: 2rem 0; border-left: 5px solid #3b82f6;">
+                <h3 style="color: #1e40af; margin-bottom: 1rem;">🎯 Informations pratiques</h3>
+                <p><strong>Durée du projet :</strong> 12 heures (développement + tests + rapport)</p>
+                <p><strong>Stack imposée :</strong> VueJS 3 + FastAPI + SQLite</p>
+                <p><strong>Repository GitHub :</strong> <a href="https://github.com/AndreyPividori/PolytechTours-PadelStarterKit" target="_blank" style="color: #1e40af;">https://github.com/AndreyPividori/PolytechTours-PadelStarterKit</a></p>
+                <p><strong>Compte de test :</strong> admin@padel.com / Admin@2025!</p>
+            </div>
+        </div>
+
+        <!-- CAHIER DES CHARGES PAGE -->
+        <div id="cahier" class="page cdc">
+            <h1>📄 Cahier des Charges - Application Corpo Padel</h1>
+            
+            <div class="info-box">
+                <strong>Durée totale :</strong> 12 heures (développement + tests + rapport)<br>
+                <strong>Travail :</strong> En binôme ou trinôme<br>
+                <strong>Modalité :</strong> Projet noté avec rendu de code et rapport
+            </div>
+
+            <h2>1. Introduction</h2>
+            <p>Ce projet pédagogique s'inscrit dans le cadre d'un cours de test et sécurité pour étudiants ingénieurs. L'objectif est de développer une application web complète pour gérer les tournois de padel corporatifs d'une entreprise.</p>
+
+            <h3>Objectifs pédagogiques</h3>
+            <ul>
+                <li><strong>Développement Full-Stack :</strong> Créer une application complète avec frontend VueJS et backend FastAPI</li>
+                <li><strong>Tests automatisés :</strong> Implémenter des tests unitaires (Python) et End-to-End (Cypress)</li>
+                <li><strong>Sécurité applicative :</strong> Mettre en œuvre les bonnes pratiques de sécurité (validation, XSS, authentification)</li>
+                <li><strong>Gestion de base de données :</strong> Concevoir et manipuler un schéma de données cohérent</li>
+                <li><strong>Documentation :</strong> Rédiger un rapport technique complet</li>
+            </ul>
+
+            <h2>2. Spécifications Fonctionnelles</h2>
+            
+            <h3>2.1 Gestion des rôles</h3>
+            <table>
+                <tr>
+                    <th>Rôle</th>
+                    <th>Description</th>
+                    <th>Accès</th>
+                </tr>
+                <tr>
+                    <td><strong>Visiteur</strong></td>
+                    <td>Utilisateur non authentifié</td>
+                    <td>Page d'accueil uniquement</td>
+                </tr>
+                <tr>
+                    <td><strong>Joueur</strong></td>
+                    <td>Joueur inscrit dans au moins une équipe</td>
+                    <td>Toutes les pages sauf Administration</td>
+                </tr>
+                <tr>
+                    <td><strong>Administrateur</strong></td>
+                    <td>Bénévole gestionnaire du tournoi</td>
+                    <td>Toutes les pages avec droits d'édition</td>
+                </tr>
+            </table>
+
+            <h3>2.2 Authentification JWT</h3>
+            <div class="info-box">
+                <strong>Méthode :</strong> JWT (JSON Web Token)<br>
+                <strong>Durée de validité :</strong> 24 heures<br>
+                <strong>Stockage :</strong> localStorage côté client
+            </div>
+
+            <h3>2.3 Mécanisme anti-brute force</h3>
+            <div class="danger-box">
+                <strong>OBLIGATOIRE :</strong> Implémentation d'une protection contre les attaques par force brute
+                <ul style="margin-top: 0.5rem;">
+                    <li>Maximum 5 tentatives de connexion échouées</li>
+                    <li>Blocage du compte pendant 30 minutes après 5 échecs</li>
+                    <li>Compteur réinitialisé après connexion réussie</li>
+                </ul>
+            </div>
+
+            <h2>3. Pages de l'Application</h2>
+            
+            <h3>📍 Page d'accueil</h3>
+            <p>Page simple avec image/bannière padel et message de bienvenue. Bouton "Se connecter" pour les visiteurs.</p>
+
+            <h3>📅 Planning</h3>
+            <p>Calendrier mensuel avec visualisation des événements. Chaque événement contient 1 à 3 matchs.</p>
+            <ul>
+                <li><strong>Joueur :</strong> Voir ses propres événements (filtre par défaut)</li>
+                <li><strong>Admin :</strong> Ajouter, modifier, supprimer des événements</li>
+            </ul>
+
+            <h3>⚽ Matchs</h3>
+            <p>Liste des matchs à venir dans les 30 prochains jours.</p>
+            <ul>
+                <li>Affichage : Date, heure, piste, équipes, joueurs, statut</li>
+                <li><strong>Admin :</strong> Ajouter, modifier scores, supprimer matchs</li>
+            </ul>
+
+            <h3>📊 Résultats</h3>
+            <p>Consultation des résultats et classement général des entreprises.</p>
+            <ul>
+                <li>Système de points : Victoire = 3 pts, Défaite = 0 pt</li>
+                <li>Classement : Total points → Victoires → Diff sets → Alphabétique</li>
+            </ul>
+
+            <h3>🔧 Administration</h3>
+            <div class="danger-box">
+                <strong>ACCÈS RÉSERVÉ :</strong> Page accessible uniquement aux administrateurs
+            </div>
+            <ul>
+                <li>Gestion des joueurs (CRUD complet)</li>
+                <li>Gestion des équipes (2 joueurs par équipe, même entreprise)</li>
+                <li>Gestion des poules (exactement 6 équipes par poule)</li>
+                <li>Création de comptes utilisateurs</li>
+                <li>Réinitialisation de mots de passe</li>
+            </ul>
+
+            <h3>👤 Profil</h3>
+            <p>Chaque utilisateur peut consulter et modifier :</p>
+            <ul>
+                <li>Nom, Prénom (modifiables)</li>
+                <li>Photo de profil (JPG/PNG, max 2MB)</li>
+                <li>Date de naissance (âge min : 16 ans)</li>
+                <li>Email (format valide, unique)</li>
+                <li>N° de licence (lecture seule, format LXXXXXX)</li>
+            </ul>
+
+            <h2>4. Spécifications Techniques</h2>
+            
+            <h3>4.1 Stack imposée</h3>
+            <table>
+                <tr>
+                    <th>Composant</th>
+                    <th>Technologie</th>
+                    <th>Version</th>
+                </tr>
+                <tr>
+                    <td>Frontend</td>
+                    <td>VueJS</td>
+                    <td>3.3.x</td>
+                </tr>
+                <tr>
+                    <td>Backend</td>
+                    <td>FastAPI</td>
+                    <td>0.104.x</td>
+                </tr>
+                <tr>
+                    <td>Database</td>
+                    <td>SQLite</td>
+                    <td>3.x</td>
+                </tr>
+                <tr>
+                    <td>Tests Backend</td>
+                    <td>Pytest</td>
+                    <td>7.x</td>
+                </tr>
+                <tr>
+                    <td>Tests E2E</td>
+                    <td>Cypress</td>
+                    <td>13.x</td>
+                </tr>
+            </table>
+
+            <h3>4.2 Modèle de données</h3>
+            <p><strong>Tables principales :</strong></p>
+            <ul>
+                <li><code>users</code> : Comptes utilisateurs (email, password_hash, role)</li>
+                <li><code>players</code> : Informations joueurs (nom, prénom, entreprise, licence)</li>
+                <li><code>teams</code> : Équipes (2 joueurs, entreprise, poule)</li>
+                <li><code>pools</code> : Poules (nom, 6 équipes)</li>
+                <li><code>events</code> : Événements (date, heure)</li>
+                <li><code>matches</code> : Matchs (event_id, teams, piste, scores, statut)</li>
+                <li><code>login_attempts</code> : Tentatives de connexion (anti-brute force)</li>
+            </ul>
+
+            <h2>5. Exigences de Sécurité</h2>
+            
+            <div class="danger-box">
+                <strong>PRIORITÉ MAXIMALE :</strong> La sécurité est un critère d'évaluation majeur
+            </div>
+
+            <h3>5.1 Protection obligatoire</h3>
+            <ul>
+                <li><strong>Injection SQL :</strong> Utilisation exclusive de l'ORM SQLAlchemy (aucune requête brute)</li>
+                <li><strong>XSS :</strong> Sanitization des entrées, échappement HTML, utilisation de v-text dans Vue</li>
+                <li><strong>Mots de passe :</strong> Hashing avec bcrypt, politique de 12+ caractères (maj+min+chiffre+spécial)</li>
+                <li><strong>JWT :</strong> Algorithme HS256, secret en variable d'environnement, expiration 24h</li>
+                <li><strong>Validation :</strong> Pydantic côté backend + validation frontend</li>
+            </ul>
+
+            <h2>6. Tests Requis</h2>
+            
+            <h3>6.1 Tests unitaires (Pytest)</h3>
+            <div class="info-box">
+                <strong>Couverture minimale :</strong> 70% du code backend
+            </div>
+            <ul>
+                <li>Tests d'authentification (login, JWT, anti-brute force)</li>
+                <li>Tests de validation (email, licence, mot de passe, score)</li>
+                <li>Tests de sécurité (hashing, token, sanitization)</li>
+                <li>Tests métier (joueurs, équipes, poules, matchs)</li>
+            </ul>
+
+            <h3>6.2 Tests E2E (Cypress)</h3>
+            <ul>
+                <li>Parcours visiteur (redirection vers login)</li>
+                <li>Parcours joueur (connexion, consultation, profil)</li>
+                <li>Parcours admin (CRUD complet, gestion)</li>
+                <li>Tests anti-brute force (blocage après 5 tentatives)</li>
+            </ul>
+
+            <h2>7. Critères d'Évaluation (sur 20 points)</h2>
+            
+            <table>
+                <tr>
+                    <th>Critère</th>
+                    <th>Points</th>
+                </tr>
+                <tr style="background: #eff6ff;">
+                    <td colspan="2"><strong>FONCTIONNEL</strong></td>
+                </tr>
+                <tr>
+                    <td>Authentification</td>
+                    <td>2</td>
+                </tr>
+                <tr>
+                    <td>Gestion joueurs/équipes/poules</td>
+                    <td>2</td>
+                </tr>
+                <tr>
+                    <td>Planning et matchs</td>
+                    <td>2</td>
+                </tr>
+                <tr>
+                    <td>Résultats et classement</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td>Administration et profil</td>
+                    <td>1</td>
+                </tr>
+                <tr style="background: #eff6ff;">
+                    <td colspan="2"><strong>SÉCURITÉ</strong></td>
+                </tr>
+                <tr>
+                    <td>Anti-brute force</td>
+                    <td>1.5</td>
+                </tr>
+                <tr>
+                    <td>Validation des entrées + XSS</td>
+                    <td>1.5</td>
+                </tr>
+                <tr>
+                    <td>Gestion mots de passe</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td>Protection SQL + Headers</td>
+                    <td>1</td>
+                </tr>
+                <tr style="background: #eff6ff;">
+                    <td colspan="2"><strong>TESTS</strong></td>
+                </tr>
+                <tr>
+                    <td>Tests unitaires (≥70%)</td>
+                    <td>2</td>
+                </tr>
+                <tr>
+                    <td>Tests E2E Cypress</td>
+                    <td>2</td>
+                </tr>
+                <tr style="background: #eff6ff;">
+                    <td colspan="2"><strong>QUALITÉ CODE</strong></td>
+                </tr>
+                <tr>
+                    <td>Organisation et conventions</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td>Gestion erreurs et README</td>
+                    <td>1</td>
+                </tr>
+                <tr style="background: #eff6ff;">
+                    <td colspan="2"><strong>RAPPORT</strong></td>
+                </tr>
+                <tr>
+                    <td>Qualité du rapport technique</td>
+                    <td>1</td>
+                </tr>
+                <tr style="background: #d1fae5;">
+                    <td colspan="2"><strong>BONUS (max +2)</strong></td>
+                </tr>
+                <tr>
+                    <td>Tests OWASP, fonctionnalités extras, UI exceptionnelle</td>
+                    <td>+2</td>
+                </tr>
+            </table>
+
+            <h2>8. Ressources</h2>
+            <ul>
+                <li><strong>Repository GitHub :</strong> <a href="https://github.com/AndreyPividori/PolytechTours-PadelStarterKit" target="_blank">PolytechTours-PadelStarterKit</a></li>
+                <li><strong>FastAPI :</strong> <a href="https://fastapi.tiangolo.com/" target="_blank">https://fastapi.tiangolo.com/</a></li>
+                <li><strong>VueJS 3 :</strong> <a href="https://vuejs.org/" target="_blank">https://vuejs.org/</a></li>
+                <li><strong>Pytest :</strong> <a href="https://docs.pytest.org/" target="_blank">https://docs.pytest.org/</a></li>
+                <li><strong>Cypress :</strong> <a href="https://docs.cypress.io/" target="_blank">https://docs.cypress.io/</a></li>
+            </ul>
+
+            <div class="info-box" style="margin-top: 2rem;">
+                <strong>💡 Conseil :</strong> Commencez par bien comprendre l'architecture fournie dans le starter kit avant de développer les nouvelles fonctionnalités. Testez au fur et à mesure plutôt que tout à la fin !
+            </div>
+        </div>
+
+        <!-- STARTER KIT PAGE -->
+        <div id="starter" class="page starter-kit">
+            <h1>💻 Starter Kit - Corpo Padel</h1>
+            
+            <p style="font-size: 1.2rem; color: #64748b; margin-bottom: 2rem;">
+                Kit de démarrage prêt à l'emploi pour votre projet pédagogique
+            </p>
+
+            <h2>📦 Contenu du Kit</h2>
+            
+            <h3>Backend (FastAPI)</h3>
+            <pre>
+backend/
+├── app/
+│   ├── api/
+│   │   ├── auth.py          <span class="badge">✅</span> Routes d'authentification
+│   │   └── deps.py          <span class="badge">✅</span> Dépendances (get_current_user)
+│   ├── core/
+│   │   ├── config.py        <span class="badge">✅</span> Configuration
+│   │   └── security.py      <span class="badge">✅</span> JWT + hashing
+│   ├── models/
+│   │   └── models.py        <span class="badge">✅</span> User + LoginAttempt
+│   ├── schemas/
+│   │   └── auth.py          <span class="badge">✅</span> Schémas Pydantic
+│   ├── database.py          <span class="badge">✅</span> Configuration SQLAlchemy
+│   └── main.py              <span class="badge">✅</span> Application FastAPI
+├── tests/
+│   ├── conftest.py          <span class="badge">✅</span> Fixtures
+│   ├── test_auth.py         <span class="badge">✅</span> Tests authentification
+│   ├── test_security.py     <span class="badge">✅</span> Tests sécurité
+│   └── test_validation.py   <span class="badge">✅</span> Tests validation
+├── .env.example
+├── requirements.txt
+└── README.md
+            </pre>
+
+            <h3>Frontend (VueJS)</h3>
+            <pre>
+frontend/
+├── src/
+│   ├── components/
+│   │   └── NavBar.vue       <span class="badge">✅</span> Barre de navigation
+│   ├── router/
+│   │   └── index.js         <span class="badge">✅</span> Routing avec guards
+│   ├── services/
+│   │   └── api.js           <span class="badge">✅</span> Client Axios + intercepteurs
+│   ├── stores/
+│   │   └── auth.js          <span class="badge">✅</span> Store Pinia authentification
+│   ├── views/
+│   │   ├── HomePage.vue     <span class="badge">✅</span> Page d'accueil
+│   │   └── LoginPage.vue    <span class="badge">✅</span> Page de connexion
+│   ├── App.vue
+│   └── main.js
+├── cypress/
+│   ├── e2e/
+│   │   ├── auth.cy.js       <span class="badge">✅</span> Tests E2E auth
+│   │   └── navigation.cy.js <span class="badge">✅</span> Tests navigation
+│   └── support/
+│       └── commands.js      <span class="badge">✅</span> Commandes custom
+├── .env.example
+├── package.json
+└── README.md
+            </pre>
+
+            <h2>🚀 Installation Rapide</h2>
+
+            <h3>1. Cloner le repository</h3>
+            <pre>git clone https://github.com/AndreyPividori/PolytechTours-PadelStarterKit.git
+cd PolytechTours-PadelStarterKit</pre>
+
+            <h3>2. Installation Backend</h3>
+            <pre>cd backend
+
+# Créer l'environnement virtuel
+python -m venv venv
+
+# Activer l'environnement
+source venv/bin/activate  # Linux/Mac
+venv\Scripts\activate     # Windows
+
+# Installer les dépendances
+pip install -r requirements.txt
+
+# Configuration
+cp .env.example .env
+
+# Générer une SECRET_KEY
+python -c "import secrets; print(secrets.token_urlsafe(32))"
+# Copier la clé générée dans le fichier .env
+
+# Initialiser la base de données
+python -c "from app.database import init_db; init_db()"
+
+# Lancer le serveur
+uvicorn app.main:app --reload --port 8000</pre>
+
+            <div style="background: #d1fae5; padding: 1rem; border-radius: 5px; margin: 1rem 0; border-left: 4px solid #10b981;">
+                <strong>✅ Backend prêt !</strong><br>
+                API : <a href="http://localhost:8000" target="_blank">http://localhost:8000</a><br>
+                Documentation : <a href="http://localhost:8000/docs" target="_blank">http://localhost:8000/docs</a>
+            </div>
+
+            <h3>3. Installation Frontend (nouveau terminal)</h3>
+            <pre>cd frontend
+
+# Installer les dépendances
+npm install
+
+# Configuration
+cp .env.example .env
+
+# Lancer le serveur de développement
+npm run dev</pre>
+
+            <div style="background: #d1fae5; padding: 1rem; border-radius: 5px; margin: 1rem 0; border-left: 4px solid #10b981;">
+                <strong>✅ Frontend prêt !</strong><br>
+                Application : <a href="http://localhost:5173" target="_blank">http://localhost:5173</a>
+            </div>
+
+            <h2>🔐 Compte de Test</h2>
+            <div style="background: #eff6ff; padding: 1.5rem; border-radius: 8px; margin: 1rem 0;">
+                <p><strong>Email :</strong> <code>admin@padel.com</code></p>
+                <p><strong>Mot de passe :</strong> <code>Admin@2025!</code></p>
+                <p style="margin-top: 1rem; color: #64748b; font-size: 0.9rem;">
+                    Ce compte administrateur est créé automatiquement lors de l'initialisation de la base de données.
+                </p>
+            </div>
+
+            <h2>✅ Fonctionnalités Implémentées</h2>
+            <ul>
+                <li>✅ <strong>Authentification JWT</strong> : Système complet avec génération et validation de tokens</li>
+                <li>✅ <strong>Anti-brute force</strong> : Blocage automatique après 5 tentatives échouées pendant 30 minutes</li>
+                <li>✅ <strong>Hashing des mots de passe</strong> : Utilisation de bcrypt pour sécuriser les mots de passe</li>
+                <li>✅ <strong>Page d'accueil</strong> : Interface d'accueil responsive avec message de bienvenue</li>
+                <li>✅ <strong>Page de login</strong> : Formulaire de connexion avec validation et gestion des erreurs</li>
+                <li>✅ <strong>Navigation protégée</strong> : Vue Router avec guards pour protéger les routes</li>
+                <li>✅ <strong>Store d'authentification</strong> : Gestion d'état avec Pinia</li>
+                <li>✅ <strong>Client API</strong> : Axios configuré avec intercepteurs pour les tokens</li>
+                <li>✅ <strong>Tests unitaires</strong> : Exemples de tests avec Pytest</li>
+                <li>✅ <strong>Tests E2E</strong> : Exemples de tests avec Cypress</li>
+            </ul>
+
+            <h2>📝 À Développer</h2>
+            <p>Les fonctionnalités suivantes doivent être développées selon le cahier des charges :</p>
+            <ul>
+                <li>🔲 Gestion des joueurs (CRUD complet)</li>
+                <li>🔲 Gestion des équipes (création, modification, suppression)</li>
+                <li>🔲 Gestion des poules (6 équipes par poule)</li>
+                <li>🔲 Planning avec calendrier mensuel</li>
+                <li>🔲 Gestion des événements (1 à 3 matchs par événement)</li>
+                <li>🔲 Liste des matchs à venir (30 prochains jours)</li>
+                <li>🔲 Saisie et affichage des résultats</li>
+                <li>🔲 Classement général des entreprises</li>
+                <li>🔲 Interface d'administration complète</li>
+                <li>🔲 Profil utilisateur avec upload de photo</li>
+                <li>🔲 Tests complets (couverture ≥ 70%)</li>
+            </ul>
+
+            <h2>🧪 Lancer les Tests</h2>
+
+            <h3>Tests Backend (Pytest)</h3>
+            <pre>cd backend
+source venv/bin/activate  # ou venv\Scripts\activate
+
+# Lancer tous les tests
+pytest
+
+# Avec couverture de code
+pytest --cov=app --cov-report=html
+
+# Ouvrir le rapport de couverture
+# Le fichier htmlcov/index.html contient le rapport détaillé</pre>
+
+            <h3>Tests E2E (Cypress)</h3>
+            <pre>cd frontend
+
+# Mode interactif (recommandé pour le développement)
+npx cypress open
+
+# Mode headless (pour CI/CD)
+npx cypress run</pre>
+
+            <h2>🔧 Dépannage</h2>
+
+            <h3>Erreur : "Port 8000 already in use"</h3>
+            <pre># Linux/Mac
+lsof -ti:8000 | xargs kill -9
+
+# Windows
+netstat -ano | findstr :8000
+taskkill /PID &lt;PID&gt; /F</pre>
+
+            <h3>Erreur : "Module not found" (Backend)</h3>
+            <pre># Vérifier que l'environnement virtuel est activé
+# Vous devriez voir (venv) dans votre terminal
+
+pip install -r requirements.txt</pre>
+
+            <h3>Erreur : CORS</h3>
+            <p>Vérifiez que <code>ALLOWED_ORIGINS</code> dans <code>backend/.env</code> correspond à l'URL du frontend :</p>
+            <pre>ALLOWED_ORIGINS=http://localhost:5173</pre>
+
+            <h3>Erreur : "Cannot find module" (Frontend)</h3>
+            <pre>cd frontend
+rm -rf node_modules package-lock.json
+npm install</pre>
+
+            <h2>🌿 Workflow Git Recommandé</h2>
+
+            <h3>Créer votre propre repository</h3>
+            <pre># Après avoir cloné le starter kit
+cd PolytechTours-PadelStarterKit
+
+# Supprimer le remote d'origine
+git remote remove origin
+
+# Ajouter votre remote
+git remote add origin &lt;url-de-votre-nouveau-repo&gt;
+
+# Créer une branche develop
+git checkout -b develop
+
+# Pousser sur votre repository
+git push -u origin main
+git push -u origin develop</pre>
+
+            <h3>Workflow de développement</h3>
+            <pre># Créer une branche pour chaque fonctionnalité
+git checkout develop
+git checkout -b feature/gestion-joueurs
+
+# Développer, tester, commiter
+git add .
+git commit -m "feat: ajout CRUD joueurs"
+
+# Pousser la branche
+git push origin feature/gestion-joueurs
+
+# Merger dans develop après validation
+git checkout develop
+git merge feature/gestion-joueurs</pre>
+
+            <h2>📚 Structure des Commits</h2>
+            <p>Utilisez des messages de commit clairs avec préfixes :</p>
+            <ul>
+                <li><code>feat:</code> nouvelle fonctionnalité</li>
+                <li><code>fix:</code> correction de bug</li>
+                <li><code>test:</code> ajout/modification de tests</li>
+                <li><code>docs:</code> documentation</li>
+                <li><code>refactor:</code> refactoring</li>
+                <li><code>style:</code> formatage</li>
+            </ul>
+            <pre>git commit -m "feat: ajout de la gestion des équipes"
+git commit -m "fix: correction bug anti-brute force"
+git commit -m "test: ajout tests pour les matchs"</pre>
+
+            <h2>🏆 Conseils pour Réussir</h2>
+            <div style="background: #fef3c7; padding: 1.5rem; border-radius: 8px; margin: 2rem 0; border-left: 4px solid #f59e0b;">
+                <h3 style="margin-top: 0;">💡 Recommandations importantes</h3>
+                <ul>
+                    <li><strong>Commencez par le modèle de données</strong> : Créez d'abord toutes les tables nécessaires</li>
+                    <li><strong>Développez par itération</strong> : Implémentez une fonctionnalité complète (backend + frontend + tests) avant de passer à la suivante</li>
+                    <li><strong>Testez continuellement</strong> : Ne laissez pas les tests pour la fin, écrivez-les au fur et à mesure</li>
+                    <li><strong>Commits réguliers</strong> : Faites des commits fréquents avec des messages clairs</li>
+                    <li><strong>Lisez la documentation</strong> : FastAPI et Vue ont d'excellentes documentations officielles</li>
+                    <li><strong>Réutilisez le code existant</strong> : Le pattern d'authentification peut être réutilisé pour d'autres endpoints</li>
+                    <li><strong>Validez partout</strong> : Backend ET frontend pour une meilleure expérience utilisateur</li>
+                </ul>
+            </div>
+
+            <h2>📞 Ressources Utiles</h2>
+            <ul>
+                <li><strong>Repository GitHub :</strong> <a href="https://github.com/AndreyPividori/PolytechTours-PadelStarterKit" target="_blank">PolytechTours-PadelStarterKit</a></li>
+                <li><strong>Documentation FastAPI :</strong> <a href="https://fastapi.tiangolo.com/" target="_blank">https://fastapi.tiangolo.com/</a></li>
+                <li><strong>Documentation VueJS 3 :</strong> <a href="https://vuejs.org/" target="_blank">https://vuejs.org/</a></li>
+                <li><strong>Documentation SQLAlchemy :</strong> <a href="https://docs.sqlalchemy.org/" target="_blank">https://docs.sqlalchemy.org/</a></li>
+                <li><strong>Documentation Pytest :</strong> <a href="https://docs.pytest.org/" target="_blank">https://docs.pytest.org/</a></li>
+                <li><strong>Documentation Cypress :</strong> <a href="https://docs.cypress.io/" target="_blank">https://docs.cypress.io/</a></li>
+            </ul>
+
+            <div style="background: #d1fae5; padding: 1.5rem; border-radius: 8px; margin: 2rem 0; border-left: 4px solid #10b981; text-align: center;">
+                <h3 style="margin-top: 0;">🎉 Vous êtes prêt !</h3>
+                <p>Tout le nécessaire est en place pour commencer votre projet. Bon développement ! 🎾</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <p><strong>Corpo Padel</strong> - Projet Pédagogique</p>
+        <p>Cours de Test et Sécurité - Formation Ingénieur</p>
+        <p style="margin-top: 1rem;">
+            <a href="https://github.com/AndreyPividori/PolytechTours-PadelStarterKit" target="_blank">📦 Repository GitHub</a>
+        </p>
+        <p style="margin-top: 0.5rem; font-size: 0.9rem; opacity: 0.8;">
+            Version 1.0 - Octobre 2025
+        </p>
+    </footer>
+
+    <script>
+        // Navigation entre les pages
+        function navigateTo(page) {
+            // Masquer toutes les pages
+            document.querySelectorAll('.page').forEach(p => {
+                p.classList.remove('active');
+            });
+
+            // Afficher la page sélectionnée
+            document.getElementById(page).classList.add('active');
+
+            // Mettre à jour les liens actifs
+            document.querySelectorAll('.navbar-link').forEach(link => {
+                link.classList.remove('active');
+                if (link.dataset.page === page) {
+                    link.classList.add('active');
+                }
+            });
+
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        // Gestion des clics sur les liens de navigation
+        document.querySelectorAll('.navbar-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const page = link.dataset.page;
+                navigateTo(page);
+            });
+        });
+
+        // Log pour debug
+        console.log('📦 Application Corpo Padel chargée !');
+        console.log('🔗 Repository: https://github.com/AndreyPividori/PolytechTours-PadelStarterKit');
+    </script>
+</body>
+</html>
