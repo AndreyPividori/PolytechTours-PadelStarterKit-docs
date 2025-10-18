@@ -385,299 +385,2490 @@
         <div id="cahier" class="page cdc">
             <h1>📄 Cahier des Charges - Application Corpo Padel</h1>
             
-            <div class="info-box">
-                <strong>Durée totale :</strong> 12 heures (développement + tests + rapport)<br>
-                <strong>Travail :</strong> En binôme ou trinôme<br>
-                <strong>Modalité :</strong> Projet noté avec rendu de code et rapport
-            </div>
+            <div class="cover">
+    <h1>CAHIER DES CHARGES</h1>
+    <h2>Application de Gestion de Tournois<br>Corpo Padel</h2>
+    
+    <div style="margin: 80px 0;">
+        <svg width="200" height="200" viewBox="0 0 200 200" style="display: inline-block;">
+            <circle cx="100" cy="100" r="80" fill="none" stroke="#1e40af" stroke-width="4"/>
+            <circle cx="100" cy="100" r="60" fill="none" stroke="#3b82f6" stroke-width="3"/>
+            <rect x="60" y="85" width="80" height="30" fill="#1e40af" rx="5"/>
+            <circle cx="75" cy="60" r="8" fill="#f59e0b"/>
+            <circle cx="125" cy="60" r="8" fill="#f59e0b"/>
+        </svg>
+    </div>
+    
+    <div class="metadata">
+        <p><strong>Projet Pédagogique</strong></p>
+        <p>Cours de Test et Sécurité - Formation Ingénieur</p>
+        <p>Durée : 12 heures</p>
+        <p>Version 1.0 - Octobre 2025</p>
+    </div>
+</div>
 
-            <h2>1. Introduction</h2>
-            <p>Ce projet pédagogique s'inscrit dans le cadre d'un cours de test et sécurité pour étudiants ingénieurs. L'objectif est de développer une application web complète pour gérer les tournois de padel corporatifs d'une entreprise.</p>
+<!-- TABLE DES MATIÈRES -->
+<div class="toc">
+    <h1>Table des Matières</h1>
+    
+    <ul>
+        <li class="level1">1. Introduction</li>
+        <li class="level2">1.1 Contexte du projet</li>
+        <li class="level2">1.2 Objectifs pédagogiques</li>
+        <li class="level2">1.3 Glossaire</li>
+        
+        <li class="level1">2. Spécifications Fonctionnelles</li>
+        <li class="level2">2.1 Gestion des rôles et authentification</li>
+        <li class="level2">2.2 Page d'accueil</li>
+        <li class="level2">2.3 Planning</li>
+        <li class="level2">2.4 Matchs</li>
+        <li class="level2">2.5 Résultats</li>
+        <li class="level2">2.6 Administration</li>
+        <li class="level2">2.7 Profil</li>
+        
+        <li class="level1">3. Spécifications Techniques</li>
+        <li class="level2">3.1 Architecture système</li>
+        <li class="level2">3.2 Stack technologique</li>
+        <li class="level2">3.3 Modèle de données</li>
+        <li class="level2">3.4 API REST</li>
+        <li class="level2">3.5 Formats et contraintes</li>
+        
+        <li class="level1">4. Exigences de Sécurité</li>
+        <li class="level2">4.1 Authentification et autorisation</li>
+        <li class="level2">4.2 Protection contre les attaques</li>
+        <li class="level2">4.3 Validation des données</li>
+        <li class="level2">4.4 Gestion des mots de passe</li>
+        
+        <li class="level1">5. Spécifications des Tests</li>
+        <li class="level2">5.1 Tests unitaires</li>
+        <li class="level2">5.2 Tests End-to-End</li>
+        <li class="level2">5.3 Tests de sécurité OWASP</li>
+        
+        <li class="level1">6. Livrables et Évaluation</li>
+        <li class="level2">6.1 Livrables attendus</li>
+        <li class="level2">6.2 Critères d'évaluation</li>
+        
+        <li class="level1">7. Annexes</li>
+    </ul>
+</div>
 
-            <h3>Objectifs pédagogiques</h3>
-            <ul>
-                <li><strong>Développement Full-Stack :</strong> Créer une application complète avec frontend VueJS et backend FastAPI</li>
-                <li><strong>Tests automatisés :</strong> Implémenter des tests unitaires (Python) et End-to-End (Cypress)</li>
-                <li><strong>Sécurité applicative :</strong> Mettre en œuvre les bonnes pratiques de sécurité (validation, XSS, authentification)</li>
-                <li><strong>Gestion de base de données :</strong> Concevoir et manipuler un schéma de données cohérent</li>
-                <li><strong>Documentation :</strong> Rédiger un rapport technique complet</li>
-            </ul>
+<!-- CONTENU -->
+<h1>1. Introduction</h1>
 
-            <h2>2. Spécifications Fonctionnelles</h2>
-            
-            <h3>2.1 Gestion des rôles</h3>
-            <table>
-                <tr>
-                    <th>Rôle</th>
-                    <th>Description</th>
-                    <th>Accès</th>
-                </tr>
-                <tr>
-                    <td><strong>Visiteur</strong></td>
-                    <td>Utilisateur non authentifié</td>
-                    <td>Page d'accueil uniquement</td>
-                </tr>
-                <tr>
-                    <td><strong>Joueur</strong></td>
-                    <td>Joueur inscrit dans au moins une équipe</td>
-                    <td>Toutes les pages sauf Administration</td>
-                </tr>
-                <tr>
-                    <td><strong>Administrateur</strong></td>
-                    <td>Bénévole gestionnaire du tournoi</td>
-                    <td>Toutes les pages avec droits d'édition</td>
-                </tr>
-            </table>
+<h2>1.1 Contexte du projet</h2>
 
-            <h3>2.2 Authentification JWT</h3>
-            <div class="info-box">
-                <strong>Méthode :</strong> JWT (JSON Web Token)<br>
-                <strong>Durée de validité :</strong> 24 heures<br>
-                <strong>Stockage :</strong> localStorage côté client
-            </div>
+<p>Ce projet pédagogique s'inscrit dans le cadre d'un cours de test et sécurité pour étudiants ingénieurs. L'objectif est de développer une application web complète pour gérer les tournois de padel corporatifs d'une entreprise.</p>
 
-            <h3>2.3 Mécanisme anti-brute force</h3>
-            <div class="danger-box">
-                <strong>OBLIGATOIRE :</strong> Implémentation d'une protection contre les attaques par force brute
-                <ul style="margin-top: 0.5rem;">
-                    <li>Maximum 5 tentatives de connexion échouées</li>
-                    <li>Blocage du compte pendant 30 minutes après 5 échecs</li>
-                    <li>Compteur réinitialisé après connexion réussie</li>
-                </ul>
-            </div>
+<div class="info-box">
+    <strong>Durée totale :</strong> 12 heures (développement + tests + rapport)<br>
+    <strong>Travail :</strong> En binôme ou trinôme<br>
+    <strong>Modalité :</strong> Projet noté avec rendu de code et rapport
+</div>
 
-            <h2>3. Pages de l'Application</h2>
-            
-            <h3>📍 Page d'accueil</h3>
-            <p>Page simple avec image/bannière padel et message de bienvenue. Bouton "Se connecter" pour les visiteurs.</p>
+<p>L'application doit permettre aux administrateurs de gérer l'ensemble des tournois (planification, équipes, résultats) et aux joueurs de suivre leur progression et leurs prochains matchs.</p>
 
-            <h3>📅 Planning</h3>
-            <p>Calendrier mensuel avec visualisation des événements. Chaque événement contient 1 à 3 matchs.</p>
-            <ul>
-                <li><strong>Joueur :</strong> Voir ses propres événements (filtre par défaut)</li>
-                <li><strong>Admin :</strong> Ajouter, modifier, supprimer des événements</li>
-            </ul>
+<h2>1.2 Objectifs pédagogiques</h2>
 
-            <h3>⚽ Matchs</h3>
-            <p>Liste des matchs à venir dans les 30 prochains jours.</p>
-            <ul>
-                <li>Affichage : Date, heure, piste, équipes, joueurs, statut</li>
-                <li><strong>Admin :</strong> Ajouter, modifier scores, supprimer matchs</li>
-            </ul>
+<p>Ce projet vous permettra de mettre en pratique les compétences suivantes :</p>
 
-            <h3>📊 Résultats</h3>
-            <p>Consultation des résultats et classement général des entreprises.</p>
-            <ul>
-                <li>Système de points : Victoire = 3 pts, Défaite = 0 pt</li>
-                <li>Classement : Total points → Victoires → Diff sets → Alphabétique</li>
-            </ul>
+<ul>
+    <li><strong>Développement Full-Stack :</strong> Créer une application complète avec frontend VueJS et backend FastAPI</li>
+    <li><strong>Tests automatisés :</strong> Implémenter des tests unitaires (Python) et End-to-End (Cypress)</li>
+    <li><strong>Sécurité applicative :</strong> Mettre en œuvre les bonnes pratiques de sécurité (validation, XSS, authentification)</li>
+    <li><strong>Gestion de base de données :</strong> Concevoir et manipuler un schéma de données cohérent</li>
+    <li><strong>Documentation :</strong> Rédiger un rapport technique complet</li>
+</ul>
 
-            <h3>🔧 Administration</h3>
-            <div class="danger-box">
-                <strong>ACCÈS RÉSERVÉ :</strong> Page accessible uniquement aux administrateurs
-            </div>
-            <ul>
-                <li>Gestion des joueurs (CRUD complet)</li>
-                <li>Gestion des équipes (2 joueurs par équipe, même entreprise)</li>
-                <li>Gestion des poules (exactement 6 équipes par poule)</li>
-                <li>Création de comptes utilisateurs</li>
-                <li>Réinitialisation de mots de passe</li>
-            </ul>
+<h2>1.3 Glossaire</h2>
 
-            <h3>👤 Profil</h3>
-            <p>Chaque utilisateur peut consulter et modifier :</p>
-            <ul>
-                <li>Nom, Prénom (modifiables)</li>
-                <li>Photo de profil (JPG/PNG, max 2MB)</li>
-                <li>Date de naissance (âge min : 16 ans)</li>
-                <li>Email (format valide, unique)</li>
-                <li>N° de licence (lecture seule, format LXXXXXX)</li>
-            </ul>
+<table>
+    <tr>
+        <th>Terme</th>
+        <th>Définition</th>
+    </tr>
+    <tr>
+        <td><strong>Padel</strong></td>
+        <td>Sport de raquette combinant des éléments du tennis et du squash, joué en double sur un court fermé</td>
+    </tr>
+    <tr>
+        <td><strong>Corpo</strong></td>
+        <td>Abréviation de "corporatif", désigne un tournoi inter-entreprises</td>
+    </tr>
+    <tr>
+        <td><strong>Poule</strong></td>
+        <td>Groupe de 6 équipes qui s'affrontent dans un système de championnat</td>
+    </tr>
+    <tr>
+        <td><strong>Équipe</strong></td>
+        <td>Binôme de joueurs représentant une entreprise</td>
+    </tr>
+    <tr>
+        <td><strong>Événement</strong></td>
+        <td>Créneau de jeu regroupant 1 à 3 matchs à une date et heure données</td>
+    </tr>
+    <tr>
+        <td><strong>Piste</strong></td>
+        <td>Terrain de padel identifié par un numéro</td>
+    </tr>
+    <tr>
+        <td><strong>Saison</strong></td>
+        <td>Période annuelle d'un tournoi (du 1er septembre au 31 août)</td>
+    </tr>
+    <tr>
+        <td><strong>Licence</strong></td>
+        <td>Numéro d'identification unique d'un joueur (format : LXXXXXX où X est un chiffre)</td>
+    </tr>
+</table>
 
-            <h2>4. Spécifications Techniques</h2>
-            
-            <h3>4.1 Stack imposée</h3>
-            <table>
-                <tr>
-                    <th>Composant</th>
-                    <th>Technologie</th>
-                    <th>Version</th>
-                </tr>
-                <tr>
-                    <td>Frontend</td>
-                    <td>VueJS</td>
-                    <td>3.3.x</td>
-                </tr>
-                <tr>
-                    <td>Backend</td>
-                    <td>FastAPI</td>
-                    <td>0.104.x</td>
-                </tr>
-                <tr>
-                    <td>Database</td>
-                    <td>SQLite</td>
-                    <td>3.x</td>
-                </tr>
-                <tr>
-                    <td>Tests Backend</td>
-                    <td>Pytest</td>
-                    <td>7.x</td>
-                </tr>
-                <tr>
-                    <td>Tests E2E</td>
-                    <td>Cypress</td>
-                    <td>13.x</td>
-                </tr>
-            </table>
+<h1>2. Spécifications Fonctionnelles</h1>
 
-            <h3>4.2 Modèle de données</h3>
-            <p><strong>Tables principales :</strong></p>
-            <ul>
-                <li><code>users</code> : Comptes utilisateurs (email, password_hash, role)</li>
-                <li><code>players</code> : Informations joueurs (nom, prénom, entreprise, licence)</li>
-                <li><code>teams</code> : Équipes (2 joueurs, entreprise, poule)</li>
-                <li><code>pools</code> : Poules (nom, 6 équipes)</li>
-                <li><code>events</code> : Événements (date, heure)</li>
-                <li><code>matches</code> : Matchs (event_id, teams, piste, scores, statut)</li>
-                <li><code>login_attempts</code> : Tentatives de connexion (anti-brute force)</li>
-            </ul>
+<h2>2.1 Gestion des rôles et authentification</h2>
 
-            <h2>5. Exigences de Sécurité</h2>
-            
-            <div class="danger-box">
-                <strong>PRIORITÉ MAXIMALE :</strong> La sécurité est un critère d'évaluation majeur
-            </div>
+<h3>2.1.1 Les trois rôles</h3>
 
-            <h3>5.1 Protection obligatoire</h3>
-            <ul>
-                <li><strong>Injection SQL :</strong> Utilisation exclusive de l'ORM SQLAlchemy (aucune requête brute)</li>
-                <li><strong>XSS :</strong> Sanitization des entrées, échappement HTML, utilisation de v-text dans Vue</li>
-                <li><strong>Mots de passe :</strong> Hashing avec bcrypt, politique de 12+ caractères (maj+min+chiffre+spécial)</li>
-                <li><strong>JWT :</strong> Algorithme HS256, secret en variable d'environnement, expiration 24h</li>
-                <li><strong>Validation :</strong> Pydantic côté backend + validation frontend</li>
-            </ul>
+<table>
+    <tr>
+        <th>Rôle</th>
+        <th>Description</th>
+        <th>Accès</th>
+    </tr>
+    <tr>
+        <td><strong>Visiteur</strong></td>
+        <td>Utilisateur non authentifié</td>
+        <td>Page d'accueil uniquement</td>
+    </tr>
+    <tr>
+        <td><strong>Joueur</strong></td>
+        <td>Joueur inscrit dans au moins une équipe</td>
+        <td>Toutes les pages sauf Administration</td>
+    </tr>
+    <tr>
+        <td><strong>Administrateur</strong></td>
+        <td>Bénévole gestionnaire du tournoi</td>
+        <td>Toutes les pages avec droits d'édition</td>
+    </tr>
+</table>
 
-            <h2>6. Tests Requis</h2>
-            
-            <h3>6.1 Tests unitaires (Pytest)</h3>
-            <div class="info-box">
-                <strong>Couverture minimale :</strong> 70% du code backend
-            </div>
-            <ul>
-                <li>Tests d'authentification (login, JWT, anti-brute force)</li>
-                <li>Tests de validation (email, licence, mot de passe, score)</li>
-                <li>Tests de sécurité (hashing, token, sanitization)</li>
-                <li>Tests métier (joueurs, équipes, poules, matchs)</li>
-            </ul>
+<h3>2.1.2 Processus d'authentification</h3>
 
-            <h3>6.2 Tests E2E (Cypress)</h3>
-            <ul>
-                <li>Parcours visiteur (redirection vers login)</li>
-                <li>Parcours joueur (connexion, consultation, profil)</li>
-                <li>Parcours admin (CRUD complet, gestion)</li>
-                <li>Tests anti-brute force (blocage après 5 tentatives)</li>
-            </ul>
+<div class="info-box">
+    <strong>Méthode :</strong> JWT (JSON Web Token)<br>
+    <strong>Durée de validité du token :</strong> 24 heures<br>
+    <strong>Stockage :</strong> localStorage côté client
+</div>
 
-            <h2>7. Critères d'Évaluation (sur 20 points)</h2>
-            
-            <table>
-                <tr>
-                    <th>Critère</th>
-                    <th>Points</th>
-                </tr>
-                <tr style="background: #eff6ff;">
-                    <td colspan="2"><strong>FONCTIONNEL</strong></td>
-                </tr>
-                <tr>
-                    <td>Authentification</td>
-                    <td>2</td>
-                </tr>
-                <tr>
-                    <td>Gestion joueurs/équipes/poules</td>
-                    <td>2</td>
-                </tr>
-                <tr>
-                    <td>Planning et matchs</td>
-                    <td>2</td>
-                </tr>
-                <tr>
-                    <td>Résultats et classement</td>
-                    <td>1</td>
-                </tr>
-                <tr>
-                    <td>Administration et profil</td>
-                    <td>1</td>
-                </tr>
-                <tr style="background: #eff6ff;">
-                    <td colspan="2"><strong>SÉCURITÉ</strong></td>
-                </tr>
-                <tr>
-                    <td>Anti-brute force</td>
-                    <td>1.5</td>
-                </tr>
-                <tr>
-                    <td>Validation des entrées + XSS</td>
-                    <td>1.5</td>
-                </tr>
-                <tr>
-                    <td>Gestion mots de passe</td>
-                    <td>1</td>
-                </tr>
-                <tr>
-                    <td>Protection SQL + Headers</td>
-                    <td>1</td>
-                </tr>
-                <tr style="background: #eff6ff;">
-                    <td colspan="2"><strong>TESTS</strong></td>
-                </tr>
-                <tr>
-                    <td>Tests unitaires (≥70%)</td>
-                    <td>2</td>
-                </tr>
-                <tr>
-                    <td>Tests E2E Cypress</td>
-                    <td>2</td>
-                </tr>
-                <tr style="background: #eff6ff;">
-                    <td colspan="2"><strong>QUALITÉ CODE</strong></td>
-                </tr>
-                <tr>
-                    <td>Organisation et conventions</td>
-                    <td>1</td>
-                </tr>
-                <tr>
-                    <td>Gestion erreurs et README</td>
-                    <td>1</td>
-                </tr>
-                <tr style="background: #eff6ff;">
-                    <td colspan="2"><strong>RAPPORT</strong></td>
-                </tr>
-                <tr>
-                    <td>Qualité du rapport technique</td>
-                    <td>1</td>
-                </tr>
-                <tr style="background: #d1fae5;">
-                    <td colspan="2"><strong>BONUS (max +2)</strong></td>
-                </tr>
-                <tr>
-                    <td>Tests OWASP, fonctionnalités extras, UI exceptionnelle</td>
-                    <td>+2</td>
-                </tr>
-            </table>
+<p><strong>Flux d'authentification :</strong></p>
+<ol>
+    <li>L'utilisateur saisit son email et mot de passe</li>
+    <li>Le backend vérifie les credentials</li>
+    <li>Si valides, un JWT est généré contenant : user_id, email, role, exp</li>
+    <li>Le token est retourné au client et stocké</li>
+    <li>Chaque requête ultérieure inclut le token dans le header Authorization</li>
+</ol>
 
-            <h2>8. Ressources</h2>
-            <ul>
-                <li><strong>Repository GitHub :</strong> <a href="https://github.com/AndreyPividori/PolytechTours-PadelStarterKit" target="_blank">PolytechTours-PadelStarterKit</a></li>
-                <li><strong>FastAPI :</strong> <a href="https://fastapi.tiangolo.com/" target="_blank">https://fastapi.tiangolo.com/</a></li>
-                <li><strong>VueJS 3 :</strong> <a href="https://vuejs.org/" target="_blank">https://vuejs.org/</a></li>
-                <li><strong>Pytest :</strong> <a href="https://docs.pytest.org/" target="_blank">https://docs.pytest.org/</a></li>
-                <li><strong>Cypress :</strong> <a href="https://docs.cypress.io/" target="_blank">https://docs.cypress.io/</a></li>
-            </ul>
+<h3>2.1.3 Mécanisme anti-brute force</h3>
 
-            <div class="info-box" style="margin-top: 2rem;">
-                <strong>💡 Conseil :</strong> Commencez par bien comprendre l'architecture fournie dans le starter kit avant de développer les nouvelles fonctionnalités. Testez au fur et à mesure plutôt que tout à la fin !
-            </div>
-        </div>
+<div class="danger-box">
+    <strong>OBLIGATOIRE :</strong> Implémentation d'une protection contre les attaques par force brute
+</div>
+
+<p><strong>Règles :</strong></p>
+<ul>
+    <li>Maximum 5 tentatives de connexion échouées</li>
+    <li>Blocage du compte pendant 30 minutes après 5 échecs</li>
+    <li>Le compteur se réinitialise après une connexion réussie</li>
+    <li>L'utilisateur doit recevoir un message clair indiquant le nombre de tentatives restantes</li>
+    <li>Après blocage, afficher le temps restant avant déblocage</li>
+</ul>
+
+<p><strong>Implémentation technique :</strong></p>
+<pre>
+Table: login_attempts
+- email (TEXT)
+- attempts_count (INTEGER)
+- last_attempt (DATETIME)
+- locked_until (DATETIME nullable)
+</pre>
+
+<h2>2.2 Page d'accueil</h2>
+
+<h3>2.2.1 Objectif</h3>
+<p>Page d'atterrissage simple et accueillante présentant l'application.</p>
+
+<h3>2.2.2 Contenu</h3>
+<ul>
+    <li>Une image ou bannière évoquant le padel corporatif</li>
+    <li>Un message de bienvenue expliquant brièvement l'application</li>
+    <li>Un bouton "Se connecter" bien visible</li>
+</ul>
+
+<h3>2.2.3 Comportement</h3>
+
+<table>
+    <tr>
+        <th>Rôle</th>
+        <th>Affichage</th>
+    </tr>
+    <tr>
+        <td>Visiteur</td>
+        <td>Message de bienvenue + Bouton "Se connecter"</td>
+    </tr>
+    <tr>
+        <td>Joueur / Admin</td>
+        <td>Message personnalisé "Bienvenue [Prénom]" + Accès au menu complet</td>
+    </tr>
+</table>
+
+<h2>2.3 Planning</h2>
+
+<h3>2.3.1 Objectif</h3>
+<p>Visualiser tous les événements de la saison sous forme de calendrier.</p>
+
+<h3>2.3.2 Vue calendrier</h3>
+
+<p><strong>Affichage :</strong></p>
+<ul>
+    <li>Vue mensuelle par défaut</li>
+    <li>Possibilité de naviguer entre les mois</li>
+    <li>Chaque jour contenant un événement est marqué visuellement</li>
+    <li>Clic sur un jour affiche les événements de cette date</li>
+</ul>
+
+<h3>2.3.3 Structure d'un événement</h3>
+
+<div class="info-box">
+<strong>Événement :</strong> Créneau de jeu contenant 1 à 3 matchs
+</div>
+
+<table>
+    <tr>
+        <th>Champ</th>
+        <th>Type</th>
+        <th>Format</th>
+        <th>Obligatoire</th>
+    </tr>
+    <tr>
+        <td>Date</td>
+        <td>DATE</td>
+        <td>YYYY-MM-DD</td>
+        <td>Oui</td>
+    </tr>
+    <tr>
+        <td>Heure</td>
+        <td>TIME</td>
+        <td>HH:MM (24h)</td>
+        <td>Oui</td>
+    </tr>
+    <tr>
+        <td>Matchs</td>
+        <td>Liste</td>
+        <td>1 à 3 matchs</td>
+        <td>Oui (min 1)</td>
+    </tr>
+</table>
+
+<h3>2.3.4 Structure d'un match</h3>
+
+<table>
+    <tr>
+        <th>Champ</th>
+        <th>Type</th>
+        <th>Format</th>
+        <th>Obligatoire</th>
+    </tr>
+    <tr>
+        <td>Numéro de piste</td>
+        <td>INTEGER</td>
+        <td>1-10</td>
+        <td>Oui</td>
+    </tr>
+    <tr>
+        <td>Équipe 1</td>
+        <td>Référence</td>
+        <td>ID équipe</td>
+        <td>Oui</td>
+    </tr>
+    <tr>
+        <td>Équipe 2</td>
+        <td>Référence</td>
+        <td>ID équipe</td>
+        <td>Oui</td>
+    </tr>
+    <tr>
+        <td>Statut</td>
+        <td>ENUM</td>
+        <td>A_VENIR, TERMINE, ANNULE</td>
+        <td>Oui</td>
+    </tr>
+    <tr>
+        <td>Score équipe 1</td>
+        <td>TEXT</td>
+        <td>Ex: "6-4, 6-3"</td>
+        <td>Non</td>
+    </tr>
+    <tr>
+        <td>Score équipe 2</td>
+        <td>TEXT</td>
+        <td>Ex: "4-6, 3-6"</td>
+        <td>Non</td>
+    </tr>
+</table>
+
+<h3>2.3.5 Droits par rôle</h3>
+
+<h4>Joueur</h4>
+<ul>
+    <li>Voir le calendrier complet</li>
+    <li>Cliquer sur un événement pour voir les détails (date, heure, matchs)</li>
+    <li>Voir uniquement les événements où ils sont impliqués (filtre automatique)</li>
+    <li>Option pour voir tous les événements (décocher le filtre)</li>
+</ul>
+
+<h4>Administrateur</h4>
+<ul>
+    <li>Toutes les actions du joueur</li>
+    <li>Ajouter un événement (formulaire avec date, heure, sélection des matchs)</li>
+    <li>Modifier un événement existant</li>
+    <li>Supprimer un événement</li>
+</ul>
+
+<div class="warning-box">
+<strong>Règle métier :</strong> Un événement ne peut être supprimé que s'il n'a pas encore eu lieu (statut A_VENIR)
+</div>
+
+<h3>2.3.6 Formulaire d'ajout d'événement (Admin)</h3>
+
+<p><strong>Champs :</strong></p>
+<ul>
+    <li>Date (obligatoire, datepicker, min: aujourd'hui)</li>
+    <li>Heure (obligatoire, format HH:MM)</li>
+    <li>Nombre de matchs (1, 2 ou 3)</li>
+    <li>Pour chaque match :
+        <ul>
+            <li>Numéro de piste (select 1-10)</li>
+            <li>Équipe 1 (select parmi les équipes)</li>
+            <li>Équipe 2 (select parmi les équipes)</li>
+        </ul>
+    </li>
+</ul>
+
+<p><strong>Validations :</strong></p>
+<ul>
+    <li>La date doit être >= date du jour</li>
+    <li>L'heure doit être au format HH:MM (00:00 à 23:59)</li>
+    <li>Deux matchs ne peuvent pas utiliser la même piste pour le même événement</li>
+    <li>Une équipe ne peut jouer qu'un seul match par événement</li>
+</ul>
+
+<h2>2.4 Matchs</h2>
+
+<h3>2.4.1 Objectif</h3>
+<p>Afficher la liste des matchs à venir dans les 30 prochains jours sous forme de liste.</p>
+
+<h3>2.4.2 Affichage par défaut</h3>
+
+<table>
+    <tr>
+        <th>Information</th>
+        <th>Description</th>
+    </tr>
+    <tr>
+        <td>Date et heure</td>
+        <td>Format : "Lundi 15 janvier 2025 à 19:30"</td>
+    </tr>
+    <tr>
+        <td>Piste</td>
+        <td>Numéro de piste</td>
+    </tr>
+    <tr>
+        <td>Équipes</td>
+        <td>Nom entreprise équipe 1 vs Nom entreprise équipe 2</td>
+    </tr>
+    <tr>
+        <td>Joueurs</td>
+        <td>Prénom Nom de chaque joueur des 2 équipes</td>
+    </tr>
+    <tr>
+        <td>Statut</td>
+        <td>Badge coloré : À venir (bleu), Annulé (rouge)</td>
+    </tr>
+</table>
+
+<h3>2.4.3 Filtre</h3>
+
+<h4>Pour les joueurs</h4>
+<ul>
+    <li><strong>Par défaut :</strong> Affiche uniquement les matchs de leur(s) équipe(s)</li>
+    <li><strong>Option :</strong> Case à cocher "Voir tous les matchs" pour désactiver le filtre</li>
+</ul>
+
+<h4>Pour les administrateurs</h4>
+<ul>
+    <li><strong>Par défaut :</strong> Affiche tous les matchs</li>
+    <li><strong>Options de filtre :</strong>
+        <ul>
+            <li>Par entreprise</li>
+            <li>Par poule</li>
+            <li>Par statut</li>
+        </ul>
+    </li>
+</ul>
+
+<h3>2.4.4 Actions administrateur</h3>
+
+<h4>Ajouter un match</h4>
+<p>Formulaire avec les champs suivants :</p>
+<ul>
+    <li>Date (YYYY-MM-DD, >= aujourd'hui)</li>
+    <li>Heure (HH:MM)</li>
+    <li>Piste (1-10)</li>
+    <li>Équipe 1 (select)</li>
+    <li>Équipe 2 (select)</li>
+</ul>
+
+<div class="warning-box">
+<strong>Validation :</strong> Vérifier qu'aucun autre match n'utilise la même piste au même créneau (date + heure)
+</div>
+
+<h4>Modifier un match</h4>
+<ul>
+    <li>Modifier la date/heure (si statut = A_VENIR)</li>
+    <li>Changer la piste</li>
+    <li>Modifier le statut (A_VENIR → ANNULE)</li>
+    <li>Saisir les scores (si match terminé)</li>
+</ul>
+
+<h4>Supprimer un match</h4>
+<ul>
+    <li>Possible uniquement si statut = A_VENIR</li>
+    <li>Confirmation obligatoire</li>
+</ul>
+
+<h2>2.5 Résultats</h2>
+
+<h3>2.5.1 Objectif</h3>
+<p>Consulter les résultats des matchs terminés et le classement général.</p>
+
+<h3>2.5.2 Vue des résultats personnels (Joueur)</h3>
+
+<p><strong>Affichage :</strong></p>
+<ul>
+    <li>Liste chronologique (du plus récent au plus ancien)</li>
+    <li>Uniquement les matchs avec statut = TERMINE</li>
+    <li>Filtre : "Depuis le début de la saison" par défaut</li>
+</ul>
+
+<p><strong>Informations par match :</strong></p>
+<table>
+    <tr>
+        <th>Champ</th>
+        <th>Format</th>
+    </tr>
+    <tr>
+        <td>Date</td>
+        <td>DD/MM/YYYY</td>
+    </tr>
+    <tr>
+        <td>Adversaires</td>
+        <td>Prénom Nom (Entreprise)</td>
+    </tr>
+    <tr>
+        <td>Score</td>
+        <td>6-4, 6-3 (victoire en vert, défaite en rouge)</td>
+    </tr>
+    <tr>
+        <td>Piste</td>
+        <td>Numéro</td>
+    </tr>
+</table>
+
+<h3>2.5.3 Classement général des entreprises</h3>
+
+<div class="info-box">
+<strong>Système de points :</strong><br>
+- Victoire : 3 points<br>
+- Défaite : 0 point<br>
+- Match annulé : ne compte pas
+</div>
+
+<p><strong>Règles de classement :</strong></p>
+<ol>
+    <li>Total de points</li>
+    <li>En cas d'égalité : nombre de victoires</li>
+    <li>En cas d'égalité : différence de sets gagnés/perdus</li>
+    <li>En cas d'égalité : ordre alphabétique</li>
+</ol>
+
+<table>
+    <tr>
+        <th>Position</th>
+        <th>Entreprise</th>
+        <th>Matchs joués</th>
+        <th>Victoires</th>
+        <th>Défaites</th>
+        <th>Points</th>
+    </tr>
+    <tr>
+        <td>1</td>
+        <td>Entreprise A</td>
+        <td>10</td>
+        <td>8</td>
+        <td>2</td>
+        <td>24</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>Entreprise B</td>
+        <td>10</td>
+        <td>6</td>
+        <td>4</td>
+        <td>18</td>
+    </tr>
+</table>
+
+<h3>2.5.4 Format des scores</h3>
+
+<div class="info-box">
+<strong>Format attendu :</strong> "X-Y, X-Y" ou "X-Y, X-Y, X-Y" pour un match en 3 sets<br>
+<strong>Exemple :</strong> "6-4, 3-6, 7-5"
+</div>
+
+<p><strong>Règles de validation :</strong></p>
+<ul>
+    <li>Chaque set doit être au format "X-Y" où X et Y sont des entiers</li>
+    <li>Le vainqueur d'un set doit avoir au moins 6 jeux</li>
+    <li>Si un set se termine 7-X, X doit être <= 5</li>
+    <li>Si un set se termine 7-6, c'est un tie-break</li>
+    <li>Un match se joue au meilleur de 3 sets (2 ou 3 sets maximum)</li>
+</ul>
+
+<h2>2.6 Administration</h2>
+
+<div class="danger-box">
+<strong>ACCÈS RÉSERVÉ :</strong> Cette page est accessible uniquement aux administrateurs. Redirection automatique vers l'accueil pour les autres rôles.
+</div>
+
+<h3>2.6.1 Gestion des joueurs</h3>
+
+<h4>Ajouter un joueur</h4>
+<p><strong>Formulaire :</strong></p>
+<table>
+    <tr>
+        <th>Champ</th>
+        <th>Type</th>
+        <th>Validation</th>
+        <th>Obligatoire</th>
+    </tr>
+    <tr>
+        <td>Nom</td>
+        <td>TEXT</td>
+        <td>2-50 caractères, lettres et espaces uniquement</td>
+        <td>Oui</td>
+    </tr>
+    <tr>
+        <td>Prénom</td>
+        <td>TEXT</td>
+        <td>2-50 caractères, lettres et espaces uniquement</td>
+        <td>Oui</td>
+    </tr>
+    <tr>
+        <td>Entreprise</td>
+        <td>TEXT</td>
+        <td>2-100 caractères</td>
+        <td>Oui</td>
+    </tr>
+    <tr>
+        <td>N° de licence</td>
+        <td>TEXT</td>
+        <td>Format : LXXXXXX (L suivi de 6 chiffres)</td>
+        <td>Oui</td>
+    </tr>
+    <tr>
+        <td>Email</td>
+        <td>EMAIL</td>
+        <td>Format email valide, unique dans la base</td>
+        <td>Oui</td>
+    </tr>
+</table>
+
+<div class="warning-box">
+<strong>Règle métier :</strong> Si un des champs obligatoires est manquant ou invalide, la création est refusée avec un message d'erreur explicite.
+</div>
+
+<h4>Modifier un joueur</h4>
+<ul>
+    <li>Tous les champs sauf le numéro de licence et l'email</li>
+    <li>Validation identique à la création</li>
+</ul>
+
+<h4>Supprimer un joueur</h4>
+<ul>
+    <li>Possible uniquement si le joueur n'est dans aucune équipe active</li>
+    <li>Confirmation obligatoire avec message : "Attention, cette action est irréversible"</li>
+</ul>
+
+<h3>2.6.2 Gestion des équipes</h3>
+
+<h4>Structure d'une équipe</h4>
+<table>
+    <tr>
+        <th>Champ</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    <tr>
+        <td>Entreprise</td>
+        <td>TEXT</td>
+        <td>Nom de l'entreprise représentée</td>
+    </tr>
+    <tr>
+        <td>Joueur 1</td>
+        <td>Référence</td>
+        <td>ID du premier joueur</td>
+    </tr>
+    <tr>
+        <td>Joueur 2</td>
+        <td>Référence</td>
+        <td>ID du second joueur</td>
+    </tr>
+    <tr>
+        <td>Poule</td>
+        <td>Référence</td>
+        <td>ID de la poule (nullable)</td>
+    </tr>
+</table>
+
+<h4>Règles de validation</h4>
+<ul>
+    <li>Les deux joueurs doivent appartenir à la même entreprise</li>
+    <li>Un joueur ne peut être que dans une seule équipe par saison</li>
+    <li>Une équipe ne peut être dans qu'une seule poule</li>
+</ul>
+
+<h4>Actions</h4>
+<ul>
+    <li><strong>Créer :</strong> Sélectionner entreprise + 2 joueurs</li>
+    <li><strong>Modifier :</strong> Changer les joueurs (si aucun match joué)</li>
+    <li><strong>Supprimer :</strong> Possible uniquement si aucun match n'a été joué</li>
+</ul>
+
+<h3>2.6.3 Gestion des poules</h3>
+
+<h4>Structure d'une poule</h4>
+<table>
+    <tr>
+        <th>Champ</th>
+        <th>Type</th>
+        <th>Description</th>
+    </tr>
+    <tr>
+        <td>Identifiant</td>
+        <td>TEXT</td>
+        <td>Ex: "Poule A", "Poule B"</td>
+    </tr>
+    <tr>
+        <td>Équipes</td>
+        <td>Liste</td>
+        <td>Exactement 6 équipes</td>
+    </tr>
+</table>
+
+<div class="danger-box">
+<strong>RÈGLE STRICTE :</strong> Une poule doit contenir exactement 6 équipes. La création/modification est impossible avec un nombre différent.
+</div>
+
+<h4>Actions</h4>
+<ul>
+    <li><strong>Créer :</strong> Nommer la poule + sélectionner 6 équipes</li>
+    <li><strong>Modifier :</strong> Changer les équipes (toutes les équipes doivent être sans matchs joués)</li>
+    <li><strong>Supprimer :</strong> Possible uniquement si aucun match n'a été joué dans cette poule</li>
+</ul>
+
+<h3>2.6.4 Gestion des comptes</h3>
+
+<h4>Créer un compte pour un joueur</h4>
+<p><strong>Prérequis :</strong> Le joueur doit déjà exister dans la base</p>
+
+<p><strong>Processus :</strong></p>
+<ol>
+    <li>Sélectionner un joueur existant sans compte</li>
+    <li>Le système génère automatiquement :
+        <ul>
+            <li>Email : celui du joueur</li>
+            <li>Mot de passe temporaire : généré aléatoirement</li>
+            <li>Rôle : JOUEUR par défaut</li>
+        </ul>
+    </li>
+    <li>Afficher le mot de passe temporaire (une seule fois)</li>
+    <li>L'utilisateur devra changer son mot de passe à la première connexion</li>
+</ol>
+
+<div class="warning-box">
+<strong>Sécurité :</strong> Le mot de passe temporaire doit contenir au minimum 12 caractères avec majuscules, minuscules, chiffres et caractères spéciaux.
+</div>
+
+<h4>Réinitialiser un mot de passe</h4>
+<ul>
+    <li>Génération d'un nouveau mot de passe temporaire</li>
+    <li>Affichage une seule fois à l'admin</li>
+    <li>Changement obligatoire à la prochaine connexion</li>
+</ul>
+
+<h2>2.7 Profil</h2>
+
+<h3>2.7.1 Objectif</h3>
+<p>Permettre à chaque utilisateur de consulter et modifier ses informations personnelles.</p>
+
+<h3>2.7.2 Informations affichées</h3>
+
+<table>
+    <tr>
+        <th>Champ</th>
+        <th>Modifiable</th>
+        <th>Supprimable</th>
+        <th>Format</th>
+    </tr>
+    <tr>
+        <td>Nom</td>
+        <td>Oui</td>
+        <td>Non</td>
+        <td>2-50 caractères</td>
+    </tr>
+    <tr>
+        <td>Prénom</td>
+        <td>Oui</td>
+        <td>Non</td>
+        <td>2-50 caractères</td>
+    </tr>
+    <tr>
+        <td>Photo de profil</td>
+        <td>Oui</td>
+        <td>Oui</td>
+        <td>JPG/PNG, max 2MB</td>
+    </tr>
+    <tr>
+        <td>Date de naissance</td>
+        <td>Oui</td>
+        <td>Oui</td>
+        <td>YYYY-MM-DD</td>
+    </tr>
+    <tr>
+        <td>Email</td>
+        <td>Oui</td>
+        <td>Non</td>
+        <td>Format email valide</td>
+    </tr>
+    <tr>
+        <td>N° de licence</td>
+        <td>Non</td>
+        <td>Non</td>
+        <td>Lecture seule</td>
+    </tr>
+</table>
+
+<h3>2.7.3 Règles de validation</h3>
+
+<ul>
+    <li><strong>Nom/Prénom :</strong> Lettres, espaces, tirets et apostrophes uniquement</li>
+    <li><strong>Date de naissance :</strong> 
+        <ul>
+            <li>L'utilisateur doit avoir au moins 16 ans</li>
+            <li>Date ne peut pas être dans le futur</li>
+        </ul>
+    </li>
+    <li><strong>Email :</strong> 
+        <ul>
+            <li>Format valide (regex standard)</li>
+            <li>Unique dans la base de données</li>
+        </ul>
+    </li>
+    <li><strong>Photo :</strong>
+        <ul>
+            <li>Formats acceptés : .jpg, .jpeg, .png</li>
+            <li>Taille maximale : 2MB</li>
+            <li>Dimensions recommandées : 400x400px</li>
+        </ul>
+    </li>
+</ul>
+
+<h3>2.7.4 Changement de mot de passe</h3>
+
+<p><strong>Formulaire :</strong></p>
+<ul>
+    <li>Mot de passe actuel (obligatoire)</li>
+    <li>Nouveau mot de passe (obligatoire)</li>
+    <li>Confirmation du nouveau mot de passe (obligatoire)</li>
+</ul>
+
+<p><strong>Règles de validation :</strong></p>
+<ul>
+    <li>Le mot de passe actuel doit être correct</li>
+    <li>Le nouveau mot de passe doit respecter la politique de sécurité (voir section 4.4)</li>
+    <li>Les deux nouveaux mots de passe doivent correspondre</li>
+    <li>Le nouveau mot de passe doit être différent de l'ancien</li>
+</ul>
+
+<h1>3. Spécifications Techniques</h1>
+
+<h2>3.1 Architecture système</h2>
+
+<h3>3.1.1 Architecture globale</h3>
+
+<pre>
+┌─────────────────────────────────────────────┐
+│           CLIENT (Browser)                   │
+│                                              │
+│  ┌────────────────────────────────────┐    │
+│  │         VueJS 3.x                   │    │
+│  │  - Vue Router                       │    │
+│  │  - Axios (HTTP client)              │    │
+│  │  - TailwindCSS                      │    │
+│  └────────────────────────────────────┘    │
+└──────────────────┬──────────────────────────┘
+                   │ HTTP/HTTPS
+                   │ REST API
+┌──────────────────▼──────────────────────────┐
+│           SERVER                             │
+│                                              │
+│  ┌────────────────────────────────────┐    │
+│  │       FastAPI (Python 3.11+)        │    │
+│  │  - JWT Authentication               │    │
+│  │  - Pydantic Validation              │    │
+│  │  - SQLAlchemy ORM                   │    │
+│  │  - Password Hashing (bcrypt)        │    │
+│  └────────────────┬───────────────────┘    │
+│                   │                          │
+│  ┌────────────────▼───────────────────┐    │
+│  │       SQLite Database               │    │
+│  │  - File: padel_corpo.db             │    │
+│  └────────────────────────────────────┘    │
+└─────────────────────────────────────────────┘
+</pre>
+
+<h3>3.1.2 Stack technologique imposée</h3>
+
+<table>
+    <tr>
+        <th>Composant</th>
+        <th>Technologie</th>
+        <th>Version minimale</th>
+    </tr>
+    <tr>
+        <td><strong>Frontend</strong></td>
+        <td>VueJS</td>
+        <td>3.3.x</td>
+    </tr>
+    <tr>
+        <td><strong>Routing</strong></td>
+        <td>Vue Router</td>
+        <td>4.x</td>
+    </tr>
+    <tr>
+        <td><strong>HTTP Client</strong></td>
+        <td>Axios</td>
+        <td>1.x</td>
+    </tr>
+    <tr>
+        <td><strong>CSS Framework</strong></td>
+        <td>TailwindCSS</td>
+        <td>3.x</td>
+    </tr>
+    <tr>
+        <td><strong>Backend</strong></td>
+        <td>FastAPI</td>
+        <td>0.104.x</td>
+    </tr>
+    <tr>
+        <td><strong>Python</strong></td>
+        <td>Python</td>
+        <td>3.11+</td>
+    </tr>
+    <tr>
+        <td><strong>ORM</strong></td>
+        <td>SQLAlchemy</td>
+        <td>2.x</td>
+    </tr>
+    <tr>
+        <td><strong>Database</strong></td>
+        <td>SQLite</td>
+        <td>3.x</td>
+    </tr>
+    <tr>
+        <td><strong>Tests Backend</strong></td>
+        <td>Pytest</td>
+        <td>7.x</td>
+    </tr>
+    <tr>
+        <td><strong>Tests E2E</strong></td>
+        <td>Cypress</td>
+        <td>13.x</td>
+    </tr>
+</table>
+
+<h2>3.2 Modèle de données</h2>
+
+<h3>3.2.1 Diagramme ERD</h3>
+
+<pre>
+┌──────────────────┐         ┌──────────────────┐
+│   users          │         │   players        │
+├──────────────────┤         ├──────────────────┤
+│ id (PK)          │────────▶│ id (PK)          │
+│ email (UNIQUE)   │         │ first_name       │
+│ password_hash    │         │ last_name        │
+│ role             │         │ company          │
+│ is_active        │         │ license_number   │
+│ created_at       │         │ birth_date       │
+└──────────────────┘         │ photo_url        │
+                              │ user_id (FK)     │
+                              └─────┬────────────┘
+                                    │
+                         ┌──────────┴──────────┐
+                         │                      │
+                         ▼                      ▼
+              ┌──────────────────┐   ┌──────────────────┐
+              │   teams          │   │   matches        │
+              ├──────────────────┤   ├──────────────────┤
+              │ id (PK)          │   │ id (PK)          │
+              │ company          │───│ team1_id (FK)    │
+              │ player1_id (FK)  │   │ team2_id (FK)    │
+              │ player2_id (FK)  │   │ event_id (FK)    │
+              │ pool_id (FK)     │   │ court_number     │
+              └──────┬───────────┘   │ status           │
+                     │                │ score_team1      │
+                     │                │ score_team2      │
+                     │                └──────────────────┘
+                     ▼
+              ┌──────────────────┐         ┌──────────────────┐
+              │   pools          │         │   events         │
+              ├──────────────────┤         ├──────────────────┤
+              │ id (PK)          │         │ id (PK)          │
+              │ name (UNIQUE)    │         │ event_date       │
+              │ created_at       │         │ event_time       │
+              └──────────────────┘         │ created_at       │
+                                            └──────────────────┘
+
+┌──────────────────────┐
+│   login_attempts     │
+├──────────────────────┤
+│ id (PK)              │
+│ email                │
+│ attempts_count       │
+│ last_attempt         │
+│ locked_until         │
+└──────────────────────┘
+</pre>
+
+<h3>3.2.2 Schéma SQL détaillé</h3>
+
+<pre>
+-- Table users
+CREATE TABLE users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    email TEXT NOT NULL UNIQUE,
+    password_hash TEXT NOT NULL,
+    role TEXT NOT NULL CHECK(role IN ('JOUEUR', 'ADMINISTRATEUR')),
+    is_active BOOLEAN DEFAULT TRUE,
+    must_change_password BOOLEAN DEFAULT FALSE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Table players
+CREATE TABLE players (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    first_name TEXT NOT NULL,
+    last_name TEXT NOT NULL,
+    company TEXT NOT NULL,
+    license_number TEXT NOT NULL UNIQUE,
+    birth_date DATE,
+    photo_url TEXT,
+    user_id INTEGER UNIQUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL,
+    CONSTRAINT chk_license_format CHECK(license_number GLOB 'L[0-9][0-9][0-9][0-9][0-9][0-9]')
+);
+
+-- Table pools
+CREATE TABLE pools (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL UNIQUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Table teams
+CREATE TABLE teams (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    company TEXT NOT NULL,
+    player1_id INTEGER NOT NULL,
+    player2_id INTEGER NOT NULL,
+    pool_id INTEGER,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (player1_id) REFERENCES players(id) ON DELETE CASCADE,
+    FOREIGN KEY (player2_id) REFERENCES players(id) ON DELETE CASCADE,
+    FOREIGN KEY (pool_id) REFERENCES pools(id) ON DELETE SET NULL,
+    CONSTRAINT chk_different_players CHECK(player1_id != player2_id)
+);
+
+-- Table events
+CREATE TABLE events (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    event_date DATE NOT NULL,
+    event_time TIME NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Table matches
+CREATE TABLE matches (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    event_id INTEGER NOT NULL,
+    team1_id INTEGER NOT NULL,
+    team2_id INTEGER NOT NULL,
+    court_number INTEGER NOT NULL CHECK(court_number BETWEEN 1 AND 10),
+    status TEXT NOT NULL DEFAULT 'A_VENIR' CHECK(status IN ('A_VENIR', 'TERMINE', 'ANNULE')),
+    score_team1 TEXT,
+    score_team2 TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (event_id) REFERENCES events(id) ON DELETE CASCADE,
+    FOREIGN KEY (team1_id) REFERENCES teams(id) ON DELETE CASCADE,
+    FOREIGN KEY (team2_id) REFERENCES teams(id) ON DELETE CASCADE,
+    CONSTRAINT chk_different_teams CHECK(team1_id != team2_id)
+);
+
+-- Table login_attempts
+CREATE TABLE login_attempts (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    email TEXT NOT NULL,
+    attempts_count INTEGER DEFAULT 0,
+    last_attempt TIMESTAMP,
+    locked_until TIMESTAMP,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Indexes pour performances
+CREATE INDEX idx_players_user_id ON players(user_id);
+CREATE INDEX idx_teams_players ON teams(player1_id, player2_id);
+CREATE INDEX idx_teams_pool ON teams(pool_id);
+CREATE INDEX idx_matches_event ON matches(event_id);
+CREATE INDEX idx_matches_teams ON matches(team1_id, team2_id);
+CREATE INDEX idx_matches_status ON matches(status);
+CREATE INDEX idx_events_date ON events(event_date);
+CREATE INDEX idx_login_attempts_email ON login_attempts(email);
+</pre>
+
+<h2>3.3 API REST</h2>
+
+<h3>3.3.1 Convention de nommage</h3>
+
+<ul>
+    <li><strong>Base URL :</strong> <code>http://localhost:8000/api/v1</code></li>
+    <li><strong>Format :</strong> JSON uniquement</li>
+    <li><strong>Authentification :</strong> Bearer Token (JWT) dans le header Authorization</li>
+</ul>
+
+<h3>3.3.2 Endpoints - Authentification</h3>
+
+<h4>POST /auth/login</h4>
+<p><strong>Description :</strong> Authentifier un utilisateur</p>
+
+<p><strong>Request Body :</strong></p>
+<pre>
+{
+  "email": "john.doe@example.com",
+  "password": "SecureP@ssw0rd"
+}
+</pre>
+
+<p><strong>Response Success (200) :</strong></p>
+<pre>
+{
+  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "token_type": "bearer",
+  "user": {
+    "id": 1,
+    "email": "john.doe@example.com",
+    "role": "JOUEUR",
+    "must_change_password": false
+  }
+}
+</pre>
+
+<p><strong>Response Error (401) :</strong></p>
+<pre>
+{
+  "detail": "Email ou mot de passe incorrect",
+  "attempts_remaining": 3
+}
+</pre>
+
+<p><strong>Response Locked (403) :</strong></p>
+<pre>
+{
+  "detail": "Compte bloqué",
+  "locked_until": "2025-10-18T15:30:00",
+  "minutes_remaining": 28
+}
+</pre>
+
+<h4>POST /auth/change-password</h4>
+<p><strong>Description :</strong> Changer son mot de passe</p>
+<p><strong>Authentification :</strong> Requise</p>
+
+<p><strong>Request Body :</strong></p>
+<pre>
+{
+  "current_password": "OldP@ssw0rd",
+  "new_password": "NewSecureP@ssw0rd123!",
+  "confirm_password": "NewSecureP@ssw0rd123!"
+}
+</pre>
+
+<p><strong>Response Success (200) :</strong></p>
+<pre>
+{
+  "message": "Mot de passe modifié avec succès"
+}
+</pre>
+
+<h4>POST /auth/logout</h4>
+<p><strong>Description :</strong> Déconnecter l'utilisateur</p>
+<p><strong>Authentification :</strong> Requise</p>
+
+<h3>3.3.3 Endpoints - Joueurs</h3>
+
+<h4>GET /players</h4>
+<p><strong>Description :</strong> Liste tous les joueurs (Admin uniquement)</p>
+<p><strong>Authentification :</strong> Admin</p>
+
+<p><strong>Response (200) :</strong></p>
+<pre>
+{
+  "players": [
+    {
+      "id": 1,
+      "first_name": "John",
+      "last_name": "Doe",
+      "company": "Tech Corp",
+      "license_number": "L123456",
+      "birth_date": "1990-05-15",
+      "photo_url": null,
+      "has_account": true
+    }
+  ],
+  "total": 1
+}
+</pre>
+
+<h4>GET /players/{id}</h4>
+<p><strong>Description :</strong> Détails d'un joueur</p>
+<p><strong>Authentification :</strong> Requise</p>
+
+<h4>POST /players</h4>
+<p><strong>Description :</strong> Créer un joueur (Admin uniquement)</p>
+<p><strong>Authentification :</strong> Admin</p>
+
+<p><strong>Request Body :</strong></p>
+<pre>
+{
+  "first_name": "John",
+  "last_name": "Doe",
+  "company": "Tech Corp",
+  "license_number": "L123456",
+  "email": "john.doe@example.com"
+}
+</pre>
+
+<p><strong>Validation :</strong></p>
+<ul>
+    <li><code>first_name</code>: 2-50 caractères, lettres et espaces</li>
+    <li><code>last_name</code>: 2-50 caractères, lettres et espaces</li>
+    <li><code>company</code>: 2-100 caractères</li>
+    <li><code>license_number</code>: Format LXXXXXX (unique)</li>
+    <li><code>email</code>: Format email valide (unique)</li>
+</ul>
+
+<h4>PUT /players/{id}</h4>
+<p><strong>Description :</strong> Modifier un joueur (Admin uniquement)</p>
+
+<h4>DELETE /players/{id}</h4>
+<p><strong>Description :</strong> Supprimer un joueur (Admin uniquement)</p>
+<p><strong>Condition :</strong> Le joueur ne doit appartenir à aucune équipe active</p>
+
+<h3>3.3.4 Endpoints - Équipes</h3>
+
+<h4>GET /teams</h4>
+<p><strong>Description :</strong> Liste toutes les équipes</p>
+<p><strong>Query Params :</strong></p>
+<ul>
+    <li><code>pool_id</code> (optional): Filtrer par poule</li>
+    <li><code>company</code> (optional): Filtrer par entreprise</li>
+</ul>
+
+<p><strong>Response (200) :</strong></p>
+<pre>
+{
+  "teams": [
+    {
+      "id": 1,
+      "company": "Tech Corp",
+      "players": [
+        {
+          "id": 1,
+          "first_name": "John",
+          "last_name": "Doe"
+        },
+        {
+          "id": 2,
+          "first_name": "Jane",
+          "last_name": "Smith"
+        }
+      ],
+      "pool": {
+        "id": 1,
+        "name": "Poule A"
+      }
+    }
+  ],
+  "total": 1
+}
+</pre>
+
+<h4>POST /teams</h4>
+<p><strong>Description :</strong> Créer une équipe (Admin uniquement)</p>
+
+<p><strong>Request Body :</strong></p>
+<pre>
+{
+  "company": "Tech Corp",
+  "player1_id": 1,
+  "player2_id": 2,
+  "pool_id": 1
+}
+</pre>
+
+<p><strong>Validations :</strong></p>
+<ul>
+    <li>Les deux joueurs doivent appartenir à la même entreprise</li>
+    <li>Chaque joueur ne peut être que dans une équipe par saison</li>
+    <li><code>player1_id</code> ≠ <code>player2_id</code></li>
+</ul>
+
+<h4>PUT /teams/{id}</h4>
+<p><strong>Description :</strong> Modifier une équipe (Admin uniquement)</p>
+<p><strong>Condition :</strong> Aucun match joué</p>
+
+<h4>DELETE /teams/{id}</h4>
+<p><strong>Description :</strong> Supprimer une équipe (Admin uniquement)</p>
+<p><strong>Condition :</strong> Aucun match joué</p>
+
+<h3>3.3.5 Endpoints - Poules</h3>
+
+<h4>GET /pools</h4>
+<p><strong>Description :</strong> Liste toutes les poules</p>
+
+<p><strong>Response (200) :</strong></p>
+<pre>
+{
+  "pools": [
+    {
+      "id": 1,
+      "name": "Poule A",
+      "teams_count": 6,
+      "teams": [...]
+    }
+  ]
+}
+</pre>
+
+<h4>POST /pools</h4>
+<p><strong>Description :</strong> Créer une poule (Admin uniquement)</p>
+
+<p><strong>Request Body :</strong></p>
+<pre>
+{
+  "name": "Poule A",
+  "team_ids": [1, 2, 3, 4, 5, 6]
+}
+</pre>
+
+<p><strong>Validation :</strong></p>
+<ul>
+    <li>Exactement 6 équipes</li>
+    <li>Nom unique</li>
+</ul>
+
+<h4>PUT /pools/{id}</h4>
+<p><strong>Description :</strong> Modifier une poule (Admin uniquement)</p>
+<p><strong>Condition :</strong> Aucun match joué dans la poule</p>
+
+<h4>DELETE /pools/{id}</h4>
+<p><strong>Description :</strong> Supprimer une poule (Admin uniquement)</p>
+<p><strong>Condition :</strong> Aucun match joué dans la poule</p>
+
+<h3>3.3.6 Endpoints - Événements</h3>
+
+<h4>GET /events</h4>
+<p><strong>Description :</strong> Liste tous les événements</p>
+<p><strong>Query Params :</strong></p>
+<ul>
+    <li><code>start_date</code> (optional): Date de début (YYYY-MM-DD)</li>
+    <li><code>end_date</code> (optional): Date de fin (YYYY-MM-DD)</li>
+    <li><code>month</code> (optional): Mois spécifique (YYYY-MM)</li>
+</ul>
+
+<p><strong>Response (200) :</strong></p>
+<pre>
+{
+  "events": [
+    {
+      "id": 1,
+      "event_date": "2025-11-15",
+      "event_time": "19:30",
+      "matches": [
+        {
+          "id": 1,
+          "court_number": 1,
+          "team1": {...},
+          "team2": {...},
+          "status": "A_VENIR"
+        }
+      ]
+    }
+  ]
+}
+</pre>
+
+<h4>POST /events</h4>
+<p><strong>Description :</strong> Créer un événement (Admin uniquement)</p>
+
+<p><strong>Request Body :</strong></p>
+<pre>
+{
+  "event_date": "2025-11-15",
+  "event_time": "19:30",
+  "matches": [
+    {
+      "court_number": 1,
+      "team1_id": 1,
+      "team2_id": 2
+    },
+    {
+      "court_number": 2,
+      "team1_id": 3,
+      "team2_id": 4
+    }
+  ]
+}
+</pre>
+
+<p><strong>Validations :</strong></p>
+<ul>
+    <li><code>event_date</code> >= aujourd'hui</li>
+    <li><code>event_time</code> format HH:MM</li>
+    <li>1 à 3 matchs par événement</li>
+    <li>Pas de piste en double pour le même événement</li>
+    <li>Une équipe ne peut jouer qu'un match par événement</li>
+</ul>
+
+<h4>PUT /events/{id}</h4>
+<p><strong>Description :</strong> Modifier un événement (Admin uniquement)</p>
+
+<h4>DELETE /events/{id}</h4>
+<p><strong>Description :</strong> Supprimer un événement (Admin uniquement)</p>
+<p><strong>Condition :</strong> Tous les matchs doivent avoir le statut A_VENIR</p>
+
+<h3>3.3.7 Endpoints - Matchs</h3>
+
+<h4>GET /matches</h4>
+<p><strong>Description :</strong> Liste des matchs</p>
+<p><strong>Query Params :</strong></p>
+<ul>
+    <li><code>upcoming</code>: true pour les 30 prochains jours</li>
+    <li><code>team_id</code>: Filtrer par équipe</li>
+    <li><code>status</code>: Filtrer par statut</li>
+    <li><code>my_matches</code>: true pour les matchs de l'utilisateur connecté</li>
+</ul>
+
+<p><strong>Response (200) :</strong></p>
+<pre>
+{
+  "matches": [
+    {
+      "id": 1,
+      "event": {
+        "date": "2025-11-15",
+        "time": "19:30"
+      },
+      "court_number": 1,
+      "team1": {
+        "id": 1,
+        "company": "Tech Corp",
+        "players": [...]
+      },
+      "team2": {
+        "id": 2,
+        "company": "Innov Ltd",
+        "players": [...]
+      },
+      "status": "A_VENIR",
+      "score_team1": null,
+      "score_team2": null
+    }
+  ],
+  "total": 1
+}
+</pre>
+
+<h4>POST /matches</h4>
+<p><strong>Description :</strong> Créer un match (Admin uniquement)</p>
+
+<h4>PUT /matches/{id}</h4>
+<p><strong>Description :</strong> Modifier un match (Admin uniquement)</p>
+
+<p><strong>Request Body (exemple - mise à jour du score) :</strong></p>
+<pre>
+{
+  "status": "TERMINE",
+  "score_team1": "6-4, 6-3",
+  "score_team2": "4-6, 3-6"
+}
+</pre>
+
+<p><strong>Validation du score :</strong></p>
+<ul>
+    <li>Format : "X-Y, X-Y" ou "X-Y, X-Y, X-Y"</li>
+    <li>Chaque set : vainqueur >= 6 jeux</li>
+    <li>Si 7-X : X <= 5</li>
+    <li>7-6 autorisé (tie-break)</li>
+</ul>
+
+<h4>DELETE /matches/{id}</h4>
+<p><strong>Description :</strong> Supprimer un match (Admin uniquement)</p>
+<p><strong>Condition :</strong> Statut = A_VENIR</p>
+
+<h3>3.3.8 Endpoints - Résultats</h3>
+
+<h4>GET /results/my-results</h4>
+<p><strong>Description :</strong> Résultats de l'utilisateur connecté</p>
+<p><strong>Authentification :</strong> Joueur</p>
+
+<p><strong>Response (200) :</strong></p>
+<pre>
+{
+  "results": [
+    {
+      "match_id": 1,
+      "date": "2025-10-15",
+      "opponents": {
+        "company": "Innov Ltd",
+        "players": ["Alice Martin", "Bob Dupont"]
+      },
+      "score": "6-4, 6-3",
+      "result": "VICTOIRE",
+      "court_number": 1
+    }
+  ],
+  "statistics": {
+    "total_matches": 10,
+    "wins": 7,
+    "losses": 3,
+    "win_rate": 70.0
+  }
+}
+</pre>
+
+<h4>GET /results/rankings</h4>
+<p><strong>Description :</strong> Classement général des entreprises</p>
+
+<p><strong>Response (200) :</strong></p>
+<pre>
+{
+  "rankings": [
+    {
+      "position": 1,
+      "company": "Tech Corp",
+      "matches_played": 10,
+      "wins": 8,
+      "losses": 2,
+      "points": 24,
+      "sets_won": 18,
+      "sets_lost": 6
+    }
+  ]
+}
+</pre>
+
+<h3>3.3.9 Endpoints - Profil</h3>
+
+<h4>GET /profile/me</h4>
+<p><strong>Description :</strong> Profil de l'utilisateur connecté</p>
+<p><strong>Authentification :</strong> Requise</p>
+
+<p><strong>Response (200) :</strong></p>
+<pre>
+{
+  "user": {
+    "id": 1,
+    "email": "john.doe@example.com",
+    "role": "JOUEUR"
+  },
+  "player": {
+    "id": 1,
+    "first_name": "John",
+    "last_name": "Doe",
+    "company": "Tech Corp",
+    "license_number": "L123456",
+    "birth_date": "1990-05-15",
+    "photo_url": "/uploads/profile_1.jpg"
+  }
+}
+</pre>
+
+<h4>PUT /profile/me</h4>
+<p><strong>Description :</strong> Modifier son profil</p>
+
+<p><strong>Request Body :</strong></p>
+<pre>
+{
+  "first_name": "John",
+  "last_name": "Doe",
+  "birth_date": "1990-05-15",
+  "email": "john.doe@newemail.com"
+}
+</pre>
+
+<h4>POST /profile/me/photo</h4>
+<p><strong>Description :</strong> Upload photo de profil</p>
+<p><strong>Content-Type :</strong> multipart/form-data</p>
+<p><strong>Max size :</strong> 2MB</p>
+<p><strong>Formats :</strong> .jpg, .jpeg, .png</p>
+
+<h4>DELETE /profile/me/photo</h4>
+<p><strong>Description :</strong> Supprimer la photo de profil</p>
+
+<h3>3.3.10 Endpoints - Administration</h3>
+
+<h4>POST /admin/accounts/create</h4>
+<p><strong>Description :</strong> Créer un compte pour un joueur</p>
+<p><strong>Authentification :</strong> Admin</p>
+
+<p><strong>Request Body :</strong></p>
+<pre>
+{
+  "player_id": 1,
+  "role": "JOUEUR"
+}
+</pre>
+
+<p><strong>Response (201) :</strong></p>
+<pre>
+{
+  "message": "Compte créé avec succès",
+  "email": "john.doe@example.com",
+  "temporary_password": "T3mp@ryP@ss2025!Xy",
+  "warning": "Ce mot de passe ne sera affiché qu'une seule fois"
+}
+</pre>
+
+<h4>POST /admin/accounts/{user_id}/reset-password</h4>
+<p><strong>Description :</strong> Réinitialiser le mot de passe d'un utilisateur</p>
+<p><strong>Authentification :</strong> Admin</p>
+
+<p><strong>Response (200) :</strong></p>
+<pre>
+{
+  "message": "Mot de passe réinitialisé",
+  "temporary_password": "N3wT3mp@ryP@ss!",
+  "warning": "Ce mot de passe ne sera affiché qu'une seule fois"
+}
+</pre>
+
+<h2>3.4 Formats et Contraintes</h2>
+
+<h3>3.4.1 Formats de dates et heures</h3>
+
+<table>
+    <tr>
+        <th>Type</th>
+        <th>Format</th>
+        <th>Exemple</th>
+        <th>Regex</th>
+    </tr>
+    <tr>
+        <td>Date</td>
+        <td>YYYY-MM-DD</td>
+        <td>2025-11-15</td>
+        <td>^\d{4}-\d{2}-\d{2}$</td>
+    </tr>
+    <tr>
+        <td>Heure</td>
+        <td>HH:MM</td>
+        <td>19:30</td>
+        <td>^([01]\d|2[0-3]):([0-5]\d)$</td>
+    </tr>
+    <tr>
+        <td>Timestamp</td>
+        <td>ISO 8601</td>
+        <td>2025-11-15T19:30:00Z</td>
+        <td>-</td>
+    </tr>
+</table>
+
+<h3>3.4.2 Formats de validation</h3>
+
+<table>
+    <tr>
+        <th>Champ</th>
+        <th>Regex / Règle</th>
+        <th>Message d'erreur</th>
+    </tr>
+    <tr>
+        <td>Email</td>
+        <td>^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$</td>
+        <td>"Format d'email invalide"</td>
+    </tr>
+    <tr>
+        <td>Licence</td>
+        <td>^L\d{6}$</td>
+        <td>"Le numéro de licence doit être au format LXXXXXX"</td>
+    </tr>
+    <tr>
+        <td>Nom/Prénom</td>
+        <td>^[a-zA-ZÀ-ÿ\s'-]{2,50}$</td>
+        <td>"2 à 50 caractères, lettres uniquement"</td>
+    </tr>
+    <tr>
+        <td>Score</td>
+        <td>^(\d+-\d+)(,\s*\d+-\d+){1,2}$</td>
+        <td>"Format de score invalide (ex: 6-4, 6-3)"</td>
+    </tr>
+    <tr>
+        <td>Court</td>
+        <td>1 <= n <= 10</td>
+        <td>"Le numéro de piste doit être entre 1 et 10"</td>
+    </tr>
+</table>
+
+<h3>3.4.3 Codes de statut HTTP</h3>
+
+<table>
+    <tr>
+        <th>Code</th>
+        <th>Signification</th>
+        <th>Utilisation</th>
+    </tr>
+    <tr>
+        <td>200</td>
+        <td>OK</td>
+        <td>Requête réussie (GET, PUT)</td>
+    </tr>
+    <tr>
+        <td>201</td>
+        <td>Created</td>
+        <td>Ressource créée (POST)</td>
+    </tr>
+    <tr>
+        <td>204</td>
+        <td>No Content</td>
+        <td>Suppression réussie (DELETE)</td>
+    </tr>
+    <tr>
+        <td>400</td>
+        <td>Bad Request</td>
+        <td>Données invalides</td>
+    </tr>
+    <tr>
+        <td>401</td>
+        <td>Unauthorized</td>
+        <td>Non authentifié</td>
+    </tr>
+    <tr>
+        <td>403</td>
+        <td>Forbidden</td>
+        <td>Accès interdit (rôle insuffisant ou compte bloqué)</td>
+    </tr>
+    <tr>
+        <td>404</td>
+        <td>Not Found</td>
+        <td>Ressource inexistante</td>
+    </tr>
+    <tr>
+        <td>409</td>
+        <td>Conflict</td>
+        <td>Conflit (email/licence déjà utilisé)</td>
+    </tr>
+    <tr>
+        <td>422</td>
+        <td>Unprocessable Entity</td>
+        <td>Validation Pydantic échouée</td>
+    </tr>
+    <tr>
+        <td>500</td>
+        <td>Internal Server Error</td>
+        <td>Erreur serveur</td>
+    </tr>
+</table>
+
+<h1>4. Exigences de Sécurité</h1>
+
+<div class="danger-box">
+<strong>PRIORITÉ MAXIMALE :</strong> La sécurité est un critère d'évaluation majeur de ce projet. Toutes les exigences de cette section sont obligatoires.
+</div>
+
+<h2>4.1 Authentification et Autorisation</h2>
+
+<h3>4.1.1 JWT (JSON Web Tokens)</h3>
+
+<p><strong>Configuration obligatoire :</strong></p>
+<ul>
+    <li><strong>Algorithme :</strong> HS256</li>
+    <li><strong>Secret :</strong> Généré aléatoirement, stocké en variable d'environnement</li>
+    <li><strong>Durée de validité :</strong> 24 heures</li>
+    <li><strong>Payload minimum :</strong>
+        <ul>
+            <li><code>sub</code>: user_id</li>
+            <li><code>email</code>: email de l'utilisateur</li>
+            <li><code>role</code>: rôle de l'utilisateur</li>
+            <li><code>exp</code>: timestamp d'expiration</li>
+        </ul>
+    </li>
+</ul>
+
+<p><strong>Implémentation :</strong></p>
+<pre>
+# Exemple Python avec PyJWT
+import jwt
+from datetime import datetime, timedelta
+
+def create_access_token(user_id: int, email: str, role: str) -> str:
+    payload = {
+        "sub": user_id,
+        "email": email,
+        "role": role,
+        "exp": datetime.utcnow() + timedelta(hours=24)
+    }
+    return jwt.encode(payload, SECRET_KEY, algorithm="HS256")
+</pre>
+
+<h3>4.1.2 Protection des routes</h3>
+
+<p><strong>Middleware d'authentification :</strong></p>
+<ul>
+    <li>Vérifier la présence du token dans le header <code>Authorization: Bearer {token}</code></li>
+    <li>Valider le token (signature, expiration)</li>
+    <li>Extraire les informations utilisateur</li>
+    <li>Retourner 401 si token invalide ou absent</li>
+</ul>
+
+<p><strong>Middleware d'autorisation :</strong></p>
+<ul>
+    <li>Vérifier que le rôle de l'utilisateur correspond aux permissions requises</li>
+    <li>Retourner 403 si permissions insuffisantes</li>
+</ul>
+
+<table>
+    <tr>
+        <th>Route</th>
+        <th>Authentification</th>
+        <th>Rôle requis</th>
+    </tr>
+    <tr>
+        <td>/api/v1/auth/login</td>
+        <td>Non</td>
+        <td>-</td>
+    </tr>
+    <tr>
+        <td>/api/v1/profile/*</td>
+        <td>Oui</td>
+        <td>Tous</td>
+    </tr>
+    <tr>
+        <td>/api/v1/players (GET)</td>
+        <td>Oui</td>
+        <td>Admin</td>
+    </tr>
+    <tr>
+        <td>/api/v1/admin/*</td>
+        <td>Oui</td>
+        <td>Admin</td>
+    </tr>
+    <tr>
+        <td>/api/v1/matches (POST/PUT/DELETE)</td>
+        <td>Oui</td>
+        <td>Admin</td>
+    </tr>
+</table>
+
+<h2>4.2 Protection contre les attaques</h2>
+
+<h3>4.2.1 Injection SQL</h3>
+
+<div class="danger-box">
+<strong>OBLIGATOIRE :</strong> Utilisation exclusive de l'ORM SQLAlchemy. Aucune requête SQL brute n'est autorisée.
+</div>
+
+<p><strong>Exemple correct :</strong></p>
+<pre>
+# ✅ CORRECT - Utilisation de l'ORM
+user = db.query(User).filter(User.email == email).first()
+
+# ❌ INTERDIT - Requête SQL brute
+user = db.execute(f"SELECT * FROM users WHERE email = '{email}'")
+</pre>
+
+<h3>4.2.2 XSS (Cross-Site Scripting)</h3>
+
+<p><strong>Protection côté backend :</strong></p>
+<ul>
+    <li>Sanitization de toutes les entrées textuelles</li>
+    <li>Échappement des caractères spéciaux HTML</li>
+    <li>Headers de sécurité :
+        <ul>
+            <li><code>X-Content-Type-Options: nosniff</code></li>
+            <li><code>X-Frame-Options: DENY</code></li>
+            <li><code>Content-Security-Policy</code></li>
+        </ul>
+    </li>
+</ul>
+
+<p><strong>Protection côté frontend :</strong></p>
+<ul>
+    <li>Utilisation de <code>v-text</code> au lieu de <code>v-html</code> dans VueJS</li>
+    <li>Validation des données avant affichage</li>
+    <li>Pas d'<code>eval()</code> ou d'exécution de code dynamique</li>
+</ul>
+
+<p><strong>Exemple de sanitization :</strong></p>
+<pre>
+import bleach
+
+def sanitize_input(text: str) -> str:
+    # Supprime tous les tags HTML
+    return bleach.clean(text, tags=[], strip=True)
+</pre>
+
+<h3>4.2.3 CSRF (Cross-Site Request Forgery)</h3>
+
+<p><strong>Protection :</strong></p>
+<ul>
+    <li>Utilisation de tokens JWT (inclus dans les headers, pas dans les cookies)</li>
+    <li>Vérification de l'origin des requêtes</li>
+    <li>Header <code>SameSite=Strict</code> si utilisation de cookies</li>
+</ul>
+
+<h3>4.2.4 Brute Force (Anti-bot)</h3>
+
+<div class="success-box">
+<strong>IMPLÉMENTATION REQUISE :</strong> Mécanisme de blocage après 5 tentatives échouées
+</div>
+
+<p><strong>Algorithme :</strong></p>
+<pre>
+1. Tentative de connexion reçue
+2. Vérifier dans login_attempts si l'email est bloqué
+   - Si locked_until > maintenant : retourner 403 avec temps restant
+3. Vérifier les credentials
+   - Si invalides :
+     * Incrémenter attempts_count
+     * Si attempts_count >= 5 :
+       - Définir locked_until = maintenant + 30 minutes
+     * Retourner 401 avec tentatives restantes
+   - Si valides :
+     * Réinitialiser attempts_count à 0
+     * Retourner le token
+</pre>
+
+<p><strong>Table de suivi :</strong></p>
+<pre>
+CREATE TABLE
+
+<tr>
+    <td>Protection SQL Injection</td>
+    <td>0.5</td>
+    <td>Utilisation ORM uniquement</td>
+</tr>
+<tr>
+    <td>Headers de sécurité</td>
+    <td>0.5</td>
+    <td>X-Content-Type-Options, etc.</td>
+</tr>
+<tr>
+    <td colspan="3" style="background-color: #1e40af; color: white; font-weight: bold;">TESTS (4 points)</td>
+</tr>
+<tr>
+    <td>Tests unitaires backend</td>
+    <td>2</td>
+    <td>Couverture >= 70%, scénarios complets</td>
+</tr>
+<tr>
+    <td>Tests E2E Cypress</td>
+    <td>2</td>
+    <td>Parcours visiteur, joueur, admin</td>
+</tr>
+<tr>
+    <td colspan="3" style="background-color: #1e40af; color: white; font-weight: bold;">QUALITÉ DU CODE (2 points)</td>
+</tr>
+<tr>
+    <td>Organisation et structure</td>
+    <td>0.5</td>
+    <td>Séparation des responsabilités</td>
+</tr>
+<tr>
+    <td>Respect des conventions</td>
+    <td>0.5</td>
+    <td>PEP8 (Python), style VueJS</td>
+</tr>
+<tr>
+    <td>Gestion des erreurs</td>
+    <td>0.5</td>
+    <td>Messages clairs, logging</td>
+</tr>
+<tr>
+    <td>Documentation (README)</td>
+    <td>0.5</td>
+    <td>Installation, configuration, utilisation</td>
+</tr>
+<tr>
+    <td colspan="3" style="background-color: #1e40af; color: white; font-weight: bold;">RAPPORT (1 point)</td>
+</tr>
+<tr>
+    <td>Qualité du rapport</td>
+    <td>1</td>
+    <td>Clarté, structure, screenshots</td>
+</tr>
+<tr>
+    <td colspan="3" style="background-color: #10b981; color: white; font-weight: bold;">BONUS (max +2 points)</td>
+</tr>
+<tr>
+    <td>Tests OWASP</td>
+    <td>+1</td>
+    <td>Tests de sécurité avancés</td>
+</tr>
+<tr>
+    <td>Fonctionnalités supplémentaires</td>
+    <td>+0.5</td>
+    <td>Export PDF, statistiques avancées</td>
+</tr>
+<tr>
+    <td>Interface exceptionnelle</td>
+    <td>+0.5</td>
+    <td>UX/UI très soignée</td>
+</tr>
+</table>
+</pre>
+
+<h1>7. Annexes</h1>
+
+<h2>7.1 Kit de démarrage</h2>
+
+<p>Un kit de démarrage est fourni avec ce cahier des charges. Il contient :</p>
+
+<ul>
+<li>Structure backend FastAPI avec authentification JWT fonctionnelle</li>
+<li>Structure frontend VueJS avec routing configuré</li>
+<li>Base de données SQLite initialisée</li>
+<li>Page d'accueil et page de login</li>
+<li>README complet pour le lancement</li>
+</ul>
+
+<div class="info-box">
+<strong>Important :</strong> Le kit de démarrage fournit uniquement la base. Toutes les autres fonctionnalités doivent être développées par vous.
+</div>
+
+<h2>7.2 Commandes utiles</h2>
+
+<h3>7.2.1 Backend</h3>
+
+<pre>
+# Installation
+cd backend
+python -m venv venv
+source venv/bin/activate  # Linux/Mac
+venv\Scripts\activate     # Windows
+pip install -r requirements.txt
+
+# Lancement
+uvicorn app.main:app --reload --port 8000
+
+# Tests
+pytest
+pytest --cov=app --cov-report=html
+
+# Migrations (si Alembic utilisé)
+alembic revision --autogenerate -m "description"
+alembic upgrade head
+</pre>
+
+<h3>7.2.2 Frontend</h3>
+
+<pre>
+# Installation
+cd frontend
+npm install
+
+# Lancement dev
+npm run dev
+
+# Build production
+npm run build
+
+# Tests E2E
+npx cypress open
+npx cypress run
+</pre>
+
+<h2>7.3 Variables d'environnement</h2>
+
+<p><strong>Fichier backend/.env :</strong></p>
+<pre>
+# Database
+DATABASE_URL=sqlite:///./padel_corpo.db
+
+# Security
+SECRET_KEY=your-secret-key-here-change-in-production
+ALGORITHM=HS256
+ACCESS_TOKEN_EXPIRE_MINUTES=1440
+
+# CORS
+ALLOWED_ORIGINS=http://localhost:5173
+
+# Upload
+UPLOAD_DIR=./uploads
+MAX_UPLOAD_SIZE=2097152
+</pre>
+
+<p><strong>Fichier frontend/.env :</strong></p>
+<pre>
+VITE_API_BASE_URL=http://localhost:8000/api/v1
+</pre>
+
+<h2>7.4 Ressources recommandées</h2>
+
+<h3>7.4.1 Documentation officielle</h3>
+
+<ul>
+<li><strong>FastAPI :</strong> https://fastapi.tiangolo.com/</li>
+<li><strong>VueJS 3 :</strong> https://vuejs.org/</li>
+<li><strong>SQLAlchemy :</strong> https://docs.sqlalchemy.org/</li>
+<li><strong>Pytest :</strong> https://docs.pytest.org/</li>
+<li><strong>Cypress :</strong> https://docs.cypress.io/</li>
+<li><strong>OWASP Top 10 :</strong> https://owasp.org/www-project-top-ten/</li>
+</ul>
+
+<h3>7.4.2 Tutoriels utiles</h3>
+
+<ul>
+<li>JWT Authentication avec FastAPI</li>
+<li>Vue Router pour SPA</li>
+<li>SQLAlchemy ORM best practices</li>
+<li>Writing effective Pytest tests</li>
+<li>Cypress E2E testing guide</li>
+</ul>
+
+<h2>7.5 Exemples de wireframes</h2>
+
+<h3>7.5.1 Page de login</h3>
+
+<pre>
+┌─────────────────────────────────────────┐
+│                                         │
+│           🎾 CORPO PADEL                │
+│                                         │
+│     ┌─────────────────────────────┐    │
+│     │  Email                      │    │
+│     │  ________________________   │    │
+│     │                             │    │
+│     │  Mot de passe               │    │
+│     │  ________________________   │    │
+│     │                             │    │
+│     │      [ Se connecter ]       │    │
+│     │                             │    │
+│     │  Tentatives restantes: 5    │    │
+│     └─────────────────────────────┘    │
+│                                         │
+└─────────────────────────────────────────┘
+</pre>
+
+<h3>7.5.2 Planning (vue joueur)</h3>
+
+<pre>
+┌─────────────────────────────────────────┐
+│  🏠 Accueil | 📅 Planning | ⚽ Matchs   │
+│  📊 Résultats | 👤 Profil               │
+├─────────────────────────────────────────┤
+│                                         │
+│  PLANNING NOVEMBRE 2025                 │
+│                                         │
+│  [<]  NOVEMBRE 2025  [>]                │
+│                                         │
+│  L  M  M  J  V  S  D                    │
+│              1  2  3                    │
+│  4  5  6  7  8 [9] 10                   │
+│  11 12 13 14 ●15 16 17                  │
+│  18 19 20 ●22 23 24                     │
+│  25 26 27 28 29 30                      │
+│                                         │
+│  ● = Événements planifiés               │
+│                                         │
+│  DÉTAILS DU 15 NOVEMBRE                 │
+│  ┌───────────────────────────────────┐ │
+│  │ 19:30 - Piste 1                   │ │
+│  │ Tech Corp vs Innov Ltd            │ │
+│  └───────────────────────────────────┘ │
+│                                         │
+└─────────────────────────────────────────┘
+</pre>
+
+<h3>7.5.3 Administration</h3>
+
+<pre>
+┌─────────────────────────────────────────┐
+│  ADMINISTRATION                         │
+├─────────────────────────────────────────┤
+│                                         │
+│  [Joueurs] [Équipes] [Poules] [Comptes]│
+│                                         │
+│  GESTION DES JOUEURS                    │
+│                                         │
+│  [+ Nouveau joueur]        🔍 Recherche │
+│                                         │
+│  ┌─────────────────────────────────────┐│
+│  │ Nom      Prénom   Entreprise  📝 🗑 ││
+│  ├─────────────────────────────────────┤│
+│  │ Dupont   Jean     Tech Corp   ✏️ ❌ ││
+│  │ Martin   Alice    Innov Ltd   ✏️ ❌ ││
+│  │ Durand   Bob      StartCo     ✏️ ❌ ││
+│  └─────────────────────────────────────┘│
+│                                         │
+│  Total: 3 joueurs                       │
+│                                         │
+└─────────────────────────────────────────┘
+</pre>
+
+<h2>7.6 Règles métier récapitulatives</h2>
+
+<table>
+<tr>
+    <th>Entité</th>
+    <th>Règle</th>
+</tr>
+<tr>
+    <td>Joueur</td>
+    <td>Tous les champs obligatoires doivent être renseignés</td>
+</tr>
+<tr>
+    <td>Joueur</td>
+    <td>Numéro de licence unique au format LXXXXXX</td>
+</tr>
+<tr>
+    <td>Joueur</td>
+    <td>Email unique</td>
+</tr>
+<tr>
+    <td>Joueur</td>
+    <td>Suppression impossible si dans une équipe</td>
+</tr>
+<tr>
+    <td>Équipe</td>
+    <td>Les 2 joueurs doivent être de la même entreprise</td>
+</tr>
+<tr>
+    <td>Équipe</td>
+    <td>Un joueur ne peut être que dans une équipe par saison</td>
+</tr>
+<tr>
+    <td>Équipe</td>
+    <td>Modification/suppression impossible si matchs joués</td>
+</tr>
+<tr>
+    <td>Poule</td>
+    <td>Exactement 6 équipes obligatoires</td>
+</tr>
+<tr>
+    <td>Poule</td>
+    <td>Nom unique</td>
+</tr>
+<tr>
+    <td>Événement</td>
+    <td>Date >= aujourd'hui</td>
+</tr>
+<tr>
+    <td>Événement</td>
+    <td>1 à 3 matchs par événement</td>
+</tr>
+<tr>
+    <td>Événement</td>
+    <td>Suppression impossible si matchs terminés</td>
+</tr>
+<tr>
+    <td>Match</td>
+    <td>Une piste ne peut accueillir qu'un match par créneau</td>
+</tr>
+<tr>
+    <td>Match</td>
+    <td>Une équipe ne peut jouer qu'un match par événement</td>
+</tr>
+<tr>
+    <td>Match</td>
+    <td>Suppression uniquement si statut A_VENIR</td>
+</tr>
+<tr>
+    <td>Score</td>
+    <td>Format "X-Y, X-Y" ou "X-Y, X-Y, X-Y"</td>
+</tr>
+<tr>
+    <td>Classement</td>
+    <td>Victoire = 3 points, Défaite = 0 point</td>
+</tr>
+<tr>
+    <td>Login</td>
+    <td>Blocage 30 min après 5 tentatives échouées</td>
+</tr>
+<tr>
+    <td>Mot de passe</td>
+    <td>Min 12 caractères, maj, min, chiffre, spécial</td>
+</tr>
+</table>
+<pre>
+    # Application Corpo Padel
+    
+    ## Description
+    Application de gestion de tournois corporatifs de padel.
+    
+    ## Prérequis
+    - Python 3.11+
+    - Node.js 18+
+    - SQLite 3
+    
+    ## Installation
+    
+    ### Backend
+    ```bash
+    cd backend
+    python -m venv venv
+    
+    # Linux/Mac
+    source venv/bin/activate
+    
+    # Windows
+    venv\Scripts\activate
+    
+    pip install -r requirements.txt
+    ```
+    
+    ### Frontend
+    ```bash
+    cd frontend
+    npm install
+    ```
+    
+    ## Configuration
+    
+    ### Backend
+    Créer un fichier `.env` dans le dossier backend :
+    ```
+    DATABASE_URL=sqlite:///./padel_corpo.db
+    SECRET_KEY=votre-cle-secrete-ici
+    ```
+    
+    ### Frontend
+    Créer un fichier `.env` dans le dossier frontend :
+    ```
+    VITE_API_BASE_URL=http://localhost:8000/api/v1
+    ```
+    
+    ## Lancement
+    
+    ### Backend
+    ```bash
+    cd backend
+    uvicorn app.main:app --reload --port 8000
+    ```
+    
+    Le backend sera accessible sur http://localhost:8000
+    
+    ### Frontend
+    ```bash
+    cd frontend
+    npm run dev
+    ```
+    
+    Le frontend sera accessible sur http://localhost:5173
+    
+    ## Comptes de test
+    
+    ### Administrateur
+    - Email: admin@padel.com
+    - Mot de passe: Admin@2025!
+    
+    ### Joueur
+    - Email: joueur@padel.com
+    - Mot de passe: Joueur@2025!
+    
+    ## Tests
+    
+    ### Tests unitaires backend
+    ```bash
+    cd backend
+    pytest
+    pytest --cov=app --cov-report=html
+    ```
+    
+    ### Tests E2E
+    ```bash
+    cd frontend
+    npx cypress open
+    ```
+    
+    ## Structure du projet
+    
+    ```
+    .
+    ├── backend/
+    │   ├── app/
+    │   │   ├── api/          # Routes API
+    │   │   ├── models/       # Modèles SQLAlchemy
+    │   │   ├── schemas/      # Schémas Pydantic
+    │   │   ├── services/     # Logique métier
+    │   │   └── main.py       # Point d'entrée
+    │   └── tests/
+    ├── frontend/
+    │   ├── src/
+    │   │   ├── components/   # Composants Vue
+    │   │   ├── views/        # Pages
+    │   │   ├── router/       # Configuration routing
+    │   │   └── App.vue
+    │   └── cypress/
+    └── README.md
+    ```
+    
+    ## Fonctionnalités implémentées
+    
+    - ✅ Authentification JWT avec anti-brute force
+    - ✅ Gestion des joueurs, équipes, poules
+    - ✅ Planning et matchs
+    - ✅ Résultats et classements
+    - ✅ Administration
+    - ✅ Profils utilisateurs
+    
+    ## Sécurité
+    
+    - Hashing des mots de passe avec bcrypt
+    - Protection anti-brute force (5 tentatives max)
+    - Validation des entrées (Pydantic + frontend)
+    - Protection XSS
+    - Utilisation exclusive de l'ORM (pas de SQL brut)
+    - Headers de sécurité
+    
+    ## Auteurs
+    [Vos noms]
+    
+    ## Licence
+    Projet pédagogique - Formation Ingénieur
+    ```
+    </pre>
+    
+    <h2>7.9 Checklist avant rendu</h2>
+    
+    <div class="success-box">
+    <strong>Vérifiez ces points avant de rendre votre projet :</strong>
+    </div>
+    
+    <pre>
+    □ L'application démarre correctement en suivant le README
+    □ Tous les comptes de test fonctionnent
+    □ Le mécanisme anti-brute force est opérationnel
+    □ Les mots de passe sont hashés dans la base
+    □ Toutes les validations sont en place
+    □ Les tests unitaires passent (couverture >= 70%)
+    □ Les tests E2E passent
+    □ Le rapport PDF est complet (10-15 pages)
+    □ Le code est commenté et propre
+    □ Les fichiers .env ne contiennent pas de vraies valeurs sensibles
+    □ Le fichier .gitignore exclut venv/, node_modules/, .env
+    □ Les requirements.txt et package.json sont à jour
+    □ Aucune erreur console dans le frontend
+    □ Aucune erreur dans les logs backend
+    □ Les messages d'erreur sont clairs pour l'utilisateur
+    □ La navigation entre les pages fonctionne
+    □ Les rôles sont correctement vérifiés
+    □ Les routes protégées ne sont pas accessibles sans auth
+    □ Le classement se calcule correctement
+    □ Les filtres de matchs fonctionnent
+    □ Les formulaires ont une validation temps réel
+    </pre>
+    
+    <h2>7.10 Calendrier suggéré (12h)</h2>
+    
+    <table>
+        <tr>
+            <th>Heure</th>
+            <th>Tâche</th>
+        </tr>
+        <tr>
+            <td>H0-H1</td>
+            <td>Prise en main du kit de démarrage, compréhension du CDC</td>
+        </tr>
+        <tr>
+            <td>H1-H3</td>
+            <td>Modèle de données + API joueurs/équipes/poules</td>
+        </tr>
+        <tr>
+            <td>H3-H5</td>
+            <td>API événements/matchs + Frontend (composants de base)</td>
+        </tr>
+        <tr>
+            <td>H5-H7</td>
+            <td>Pages Planning, Matchs, Résultats (frontend + backend)</td>
+        </tr>
+        <tr>
+            <td>H7-H8</td>
+            <td>Page Administration + Gestion des comptes</td>
+        </tr>
+        <tr>
+            <td>H8-H9</td>
+            <td>Profil utilisateur + Upload photo</td>
+        </tr>
+        <tr>
+            <td>H9-H10</td>
+            <td>Tests unitaires (backend) + Tests E2E</td>
+        </tr>
+        <tr>
+            <td>H10-H11</td>
+            <td>Corrections bugs, améliorations sécurité, tests complémentaires</td>
+        </tr>
+        <tr>
+            <td>H11-H12</td>
+            <td>Rédaction du rapport technique</td>
+        </tr>
+    </table>
+    
+    <div class="warning-box">
+    <strong>Conseil :</strong> Faites des commits réguliers pour ne pas perdre votre travail. Testez au fur et à mesure plutôt que tout à la fin.
+    </div>
+    
+    ---
+    
+    <div style="text-align: center; margin-top: 50px; padding: 30px; background-color: #f8fafc; border-radius: 10px;">
+        <h2 style="color: #1e40af;">Bon courage !</h2>
+        <p style="font-size: 14px; color: #94a3b8;">N'hésitez pas à consulter la documentation officielle des frameworks utilisés.</p>
+        <p style="margin-top: 30px; font-size: 12px; color: #cbd5e1;">
+            <strong>Version 1.0</strong> - Octobre 2025<br>
+            Cahier des charges - Projet pédagogique Test & Sécurité
+        </p>
+    </div>
+    
+    <script>
+    // Fonction pour générer un PDF (pour impression ou export)
+    window.onload = function() {
+        // Pas de script nécessaire pour la version print
+        console.log("Cahier des charges chargé. Utilisez Ctrl+P pour imprimer ou sauvegarder en PDF.");
+    };
+    </script>
 
         <!-- STARTER KIT PAGE -->
         <div id="starter" class="page starter-kit">
