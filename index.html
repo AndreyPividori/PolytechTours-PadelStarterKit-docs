@@ -341,13 +341,13 @@
                 <div class="hero-icon">🎾</div>
                 <h1>Projet Corpo Padel</h1>
                 <p>Documentation complète pour votre projet pédagogique</p>
-                <p style="font-size: 1rem; margin-top: 1rem;">Cours de Test et Sécurité - Formation Ingénieur</p>
+                <p style="font-size: 1rem; margin-top: 1rem;">Test et Sécurité - Qualité Logiciel - Polytech Tours</p>
             </div>
 
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin: 2rem 0;">
                 <div style="background: white; padding: 2rem; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
                     <h2 style="color: #1e40af; margin-bottom: 1rem;">📄 Cahier des charges</h2>
-                    <p>Document complet de 45+ pages avec toutes les spécifications fonctionnelles, techniques et de sécurité.</p>
+                    <p>Document complet avec toutes les spécifications fonctionnelles, techniques et de sécurité.</p>
                     <ul style="margin: 1rem 0;">
                         <li>Spécifications fonctionnelles détaillées</li>
                         <li>Architecture technique complète</li>
@@ -401,7 +401,7 @@
     
     <div class="metadata">
         <p><strong>Projet Pédagogique</strong></p>
-        <p>Cours de Test et Sécurité - Formation Ingénieur</p>
+        <p>Test et Sécurité - Qualité Logiciel - Polytech Tours</p>
         <p>Durée : 12 heures</p>
         <p>Version 1.0 - Octobre 2025</p>
     </div>
@@ -2268,6 +2268,13 @@ def sanitize_input(text: str) -> str:
 
 <p><strong>Algorithme :</strong></p>
 <pre>
+    CREATE TABLE login_attempts (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    email TEXT NOT NULL,
+    attempts_count INTEGER DEFAULT 0,
+    last_attempt TIMESTAMP,
+    locked_until TIMESTAMP NULL
+);
 1. Tentative de connexion reçue
 2. Vérifier dans login_attempts si l'email est bloqué
    - Si locked_until > maintenant : retourner 403 avec temps restant
@@ -2281,11 +2288,6 @@ def sanitize_input(text: str) -> str:
      * Réinitialiser attempts_count à 0
      * Retourner le token
 </pre>
-
-<p><strong>Table de suivi :</strong></p>
-<pre>
-CREATE TABLE
-
 <tr>
     <td>Protection SQL Injection</td>
     <td>0.5</td>
@@ -2695,7 +2697,7 @@ describe('Authentification', () => {
 
 <div class="info-box">
 <strong>Format :</strong> Archive ZIP ou repository Git<br>
-<strong>Date limite :</strong> À définir par l'enseignant
+<strong>Date limite :</strong> 31/12/2025
 </div>
 
 <p><strong>Contenu obligatoire :</strong></p>
@@ -2710,46 +2712,46 @@ describe('Authentification', () => {
 
 <h3>6.1.2 Rapport technique</h3>
 
-<p><strong>Format :</strong> PDF, 10-15 pages</p>
+<p><strong>Format :</strong> </p>
 
 <p><strong>Structure du rapport :</strong></p>
 <ol>
-    <li><strong>Introduction</strong> (1 page)
+    <li><strong>Introduction</strong> 
         <ul>
             <li>Présentation du projet</li>
             <li>Objectifs</li>
         </ul>
     </li>
-    <li><strong>Architecture</strong> (2-3 pages)
+    <li><strong>Architecture</strong>
         <ul>
             <li>Schéma d'architecture</li>
             <li>Choix technologiques</li>
             <li>Modèle de données</li>
         </ul>
     </li>
-    <li><strong>Fonctionnalités implémentées</strong> (3-4 pages)
+    <li><strong>Fonctionnalités implémentées</strong>
         <ul>
             <li>Description détaillée</li>
             <li>Screenshots</li>
         </ul>
     </li>
-    <li><strong>Sécurité</strong> (2-3 pages)
+    <li><strong>Sécurité</strong>
         <ul>
             <li>Mesures implémentées</li>
             <li>Tests de sécurité</li>
             <li>Vulnérabilités identifiées et corrigées</li>
         </ul>
     </li>
-    <li><strong>Tests</strong> (2-3 pages)
+    <li><strong>Tests</strong>
         <ul>
             <li>Stratégie de test</li>
             <li>Couverture</li>
             <li>Résultats</li>
         </ul>
     </li>
-    <li><strong>Difficultés rencontrées</strong> (1 page)</li>
-    <li><strong>Améliorations possibles</strong> (1 page)</li>
-    <li><strong>Conclusion</strong> (0.5 page)</li>
+    <li><strong>Difficultés rencontrées</strong></li>
+    <li><strong>Améliorations possibles</strong></li>
+    <li><strong>Conclusion</strong></li>
 </ol>
 <h1>7. Annexes</h1>
 
@@ -3550,7 +3552,7 @@ git commit -m "test: ajout tests pour les matchs"</pre>
     <!-- FOOTER -->
     <footer class="footer">
         <p><strong>Corpo Padel</strong> - Projet Pédagogique</p>
-        <p>Cours de Test et Sécurité - Formation Ingénieur</p>
+        <p>Test et Sécurité - Qualité Logiciel - Polytech Tours</p>
         <p style="margin-top: 1rem;">
             <a href="https://github.com/AndreyPividori/PolytechTours-PadelStarterKit" target="_blank">📦 Repository GitHub</a>
         </p>
