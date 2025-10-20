@@ -2393,81 +2393,7 @@ tests/
 pytest --cov=app --cov-report=html --cov-report=term
 </pre>
 
-<h3>5.1.3 Scénarios de tests obligatoires</h3>
-
-<h4>Tests d'authentification (test_auth.py)</h4>
-<ul>
-    <li>✓ Connexion avec credentials valides</li>
-    <li>✓ Connexion avec email invalide</li>
-    <li>✓ Connexion avec mot de passe invalide</li>
-    <li>✓ Blocage après 5 tentatives échouées</li>
-    <li>✓ Déblocage automatique après 30 minutes</li>
-    <li>✓ Réinitialisation du compteur après connexion réussie</li>
-    <li>✓ Génération correcte du JWT</li>
-    <li>✓ Vérification de l'expiration du token</li>
-    <li>✓ Changement de mot de passe</li>
-</ul>
-
-<h4>Tests de validation (test_validation.py)</h4>
-<ul>
-    <li>✓ Validation email (format valide/invalide)</li>
-    <li>✓ Validation numéro de licence (format LXXXXXX)</li>
-    <li>✓ Validation mot de passe (politique de sécurité)</li>
-    <li>✓ Validation nom/prénom (caractères autorisés)</li>
-    <li>✓ Validation date (format, âge minimum)</li>
-    <li>✓ Validation score (format padel)</li>
-</ul>
-
-<h4>Tests des joueurs (test_players.py)</h4>
-<ul>
-    <li>✓ Création joueur avec données valides</li>
-    <li>✓ Refus création si champ obligatoire manquant</li>
-    <li>✓ Refus si licence déjà utilisée</li>
-    <li>✓ Refus si email déjà utilisé</li>
-    <li>✓ Modification des informations</li>
-    <li>✓ Suppression si joueur sans équipe</li>
-    <li>✓ Refus suppression si joueur dans une équipe</li>
-</ul>
-
-<h4>Tests des équipes (test_teams.py)</h4>
-<ul>
-    <li>✓ Création équipe valide</li>
-    <li>✓ Refus si joueurs d'entreprises différentes</li>
-    <li>✓ Refus si joueur déjà dans une équipe</li>
-    <li>✓ Refus si player1_id == player2_id</li>
-    <li>✓ Modification équipe sans match</li>
-    <li>✓ Refus modification si matchs joués</li>
-</ul>
-
-<h4>Tests des poules (test_pools.py)</h4>
-<ul>
-    <li>✓ Création poule avec 6 équipes</li>
-    <li>✓ Refus si nombre d'équipes != 6</li>
-    <li>✓ Refus si nom déjà utilisé</li>
-    <li>✓ Suppression si aucun match joué</li>
-</ul>
-
-<h4>Tests des matchs (test_matches.py)</h4>
-<ul>
-    <li>✓ Création match valide</li>
-    <li>✓ Refus si même piste déjà occupée</li>
-    <li>✓ Refus si équipe joue 2 fois dans un événement</li>
-    <li>✓ Mise à jour du score avec format valide</li>
-    <li>✓ Refus score avec format invalide</li>
-    <li>✓ Suppression uniquement si statut A_VENIR</li>
-</ul>
-
-<h4>Tests de sécurité (test_security.py)</h4>
-<ul>
-    <li>✓ Accès refusé sans token</li>
-    <li>✓ Accès refusé avec token expiré</li>
-    <li>✓ Accès refusé avec token invalide</li>
-    <li>✓ Accès refusé si rôle insuffisant</li>
-    <li>✓ Hashing correct des mots de passe</li>
-    <li>✓ Protection XSS (sanitization)</li>
-</ul>
-
-<h3>5.1.4 Exemple de test</h3>
+<h3>5.1.3 Exemple de test</h3>
 
 <pre>
 # tests/test_auth.py
@@ -2523,9 +2449,9 @@ def test_brute_force_protection(test_db, test_user):
     assert "minutes_remaining" in data
 </pre>
 
-<h2>5.2 Tests End-to-End (Cypress)</h2>
+<h2>5.2 Tests End-to-End (Cypress ou autre)</h2>
 
-<h3>5.2.1 Configuration Cypress</h3>
+<h3>5.2.1 Exemple Configuration Cypress</h3>
 
 <p><strong>Installation :</strong></p>
 <pre>
@@ -2546,40 +2472,7 @@ cypress/
     └── commands.js          # Commandes custom
 </pre>
 
-<h3>5.2.2 Scénarios E2E obligatoires</h3>
-
-<h4>Parcours Visiteur</h4>
-<ul>
-    <li>✓ Accès à la page d'accueil</li>
-    <li>✓ Impossibilité d'accéder aux autres pages sans connexion</li>
-    <li>✓ Redirection automatique vers login</li>
-</ul>
-
-<h4>Parcours Joueur</h4>
-<ul>
-    <li>✓ Connexion réussie</li>
-    <li>✓ Navigation vers le planning</li>
-    <li>✓ Visualisation de ses prochains matchs</li>
-    <li>✓ Consultation de ses résultats</li>
-    <li>✓ Modification de son profil</li>
-    <li>✓ Impossibilité d'accéder à l'administration</li>
-    <li>✓ Déconnexion</li>
-</ul>
-
-<h4>Parcours Administrateur</h4>
-<ul>
-    <li>✓ Connexion admin</li>
-    <li>✓ Création d'un joueur</li>
-    <li>✓ Création d'une équipe</li>
-    <li>✓ Création d'une poule avec 6 équipes</li>
-    <li>✓ Ajout d'un événement avec matchs</li>
-    <li>✓ Modification d'un match</li>
-    <li>✓ Saisie d'un score</li>
-    <li>✓ Création d'un compte pour un joueur</li>
-    <li>✓ Réinitialisation d'un mot de passe</li>
-</ul>
-
-<h3>5.2.3 Exemple de test Cypress</h3>
+<h3>5.2.2 Exemple de test Cypress</h3>
 
 <pre>
 // cypress/e2e/auth.cy.js
